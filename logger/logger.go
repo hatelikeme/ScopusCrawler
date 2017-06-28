@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/visheratin/scopus-crawler/config"
+	"../config"
 )
 
 var (

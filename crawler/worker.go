@@ -5,12 +5,12 @@ import (
 	"strconv"
 	"strings"
 
-	uuid "github.com/satori/go.uuid"
-	"github.com/visheratin/scopus-crawler/config"
-	"github.com/visheratin/scopus-crawler/logger"
-	"github.com/visheratin/scopus-crawler/models"
-	"github.com/visheratin/scopus-crawler/query"
-	"github.com/visheratin/scopus-crawler/storage"
+	"github.com/satori/go.uuid"
+	"../config"
+	"../logger"
+	"../models"
+	"../query"
+	"../storage"
 )
 
 type Worker struct {
@@ -134,12 +134,16 @@ func (worker *Worker) ExtractArticles(rawResponse map[string]interface{}) ([]mod
 				}
 				author.Affiliation = models.Affiliation{}
 				authAffElem := authorElem["afid"]
-				authAff := authAffElem.([]interface{})
-				if len(authAff) > 0 {
-					affID, ok := authAff[0].(map[string]interface{})["$"]
-					if ok {
-						author.AffiliationID = affID.(string)
+				if authAffElem != nil {
+					authAff := authAffElem.([]interface{})
+					if len(authAff) > 0 {
+						affID, ok := authAff[0].(map[string]interface{})["$"]
+						if ok {
+							author.AffiliationID = affID.(string)
+						}
 					}
+				} else {
+					author.AffiliationID = ""
 				}
 				article.Authors = append(article.Authors, author)
 			}
@@ -151,20 +155,28 @@ func (worker *Worker) ExtractArticles(rawResponse map[string]interface{}) ([]mod
 				affElem := affVal.(map[string]interface{})
 				affiliation := models.Affiliation{}
 				id, ok := affElem["afid"]
-				if ok {
+				if ok && (id != nil) {
 					affiliation.ScopusID = id.(string)
+				} else {
+					affiliation.ScopusID = ""
 				}
 				title, ok := affElem["affilname"]
-				if ok {
+				if ok && (title != nil) {
 					affiliation.Title = title.(string)
+				} else {
+					affiliation.Title = ""
 				}
 				city, ok := affElem["affiliation-city"]
-				if ok {
+				if ok && (city != nil){
 					affiliation.City = city.(string)
+				} else {
+					affiliation.City = ""
 				}
 				country, ok := affElem["affiliation-country"]
-				if ok {
+				if ok && (country != nil){
 					affiliation.Country = country.(string)
+				} else {
+					affiliation.Country = ""
 				}
 				article.Affiliations = append(article.Affiliations, affiliation)
 			}
@@ -184,15 +196,18 @@ func (worker *Worker) ProceedArticle(article models.Article, articleDs DataSourc
 		logger.Error.Println(err)
 	}
 	articleContainer, articleRetrieved := articleData["abstracts-retrieval-response"]
-	if articleRetrieved {
+	if articleRetrieved && (articleContainer != nil) {
 		article.Keywords = []models.Keyword{}
 		keywordsContainer, ok := articleContainer.(map[string]interface{})["authkeywords"]
 		if !ok {
 			return errors.New("error on parsing authkeywords element")
 		}
-		keywordsVal, ok := keywordsContainer.(map[string]interface{})["author-keyword"]
-		if !ok {
-			return errors.New("error on parsing author-keyword element")
+		var keywordsVal interface{}
+		if keywordsContainer != nil {
+			keywordsVal, ok = keywordsContainer.(map[string]interface{})["author-keyword"]
+			if !ok {
+				return errors.New("error on parsing author-keyword element")
+			}
 		}
 		keywords, ok := keywordsVal.([]interface{})
 		if !ok {

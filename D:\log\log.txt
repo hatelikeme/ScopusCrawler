@@ -1,0 +1,58 @@
+[ERROR]: 2017/06/26 16:02:52 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/26 16:57:51 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 15:53:24 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:00:49 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:03:50 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:08:35 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:10:24 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:12:13 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:13:53 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:14:11 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:15:09 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:15:19 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:16:30 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:18:45 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:20:09 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:22:55 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:28:30 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:35:14 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 16:59:17 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 17:31:26 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 18:00:24 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/27 18:11:10 main.go:27: dial tcp [::1]:33060: getsockopt: connection refused
+[ERROR]: 2017/06/28 13:27:07 main.go:27: dial tcp [::1]:33060: getsockopt: connection refused
+[ERROR]: 2017/06/28 13:33:49 main.go:27: dial tcp [::1]:33060: getsockopt: connection refused
+[ERROR]: 2017/06/28 13:43:57 main.go:27: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2017/06/28 13:53:27 main.go:27: dial tcp 127.0.0.1:3306: getsockopt: connection refused
+[ERROR]: 2017/06/28 13:55:19 main.go:27: dial tcp 127.0.0.1:3306: getsockopt: connection refused
+[ERROR]: 2017/06/28 15:02:19 main.go:27: sql: unknown driver "sqlite" (forgotten import?)
+[ERROR]: 2017/06/28 15:02:43 main.go:27: sql: unknown driver "sqlite" (forgotten import?)
+[ERROR]: 2017/06/28 15:59:04 worker.go:54: Error on proceeding article with id=0035897696
+[ERROR]: 2017/06/28 15:59:04 worker.go:55: error on parsing keywords element
+[ERROR]: 2017/06/28 16:04:59 worker.go:54: Error on proceeding article with id=17344392308
+[ERROR]: 2017/06/28 16:04:59 worker.go:55: error on parsing keywords element
+[ERROR]: 2017/06/28 16:05:15 worker.go:54: Error on proceeding article with id=0034849408
+[ERROR]: 2017/06/28 16:05:15 worker.go:55: error on parsing keywords element
+[ERROR]: 2017/06/28 16:05:35 worker.go:54: Error on proceeding article with id=2042437650
+[ERROR]: 2017/06/28 16:05:35 worker.go:55: error on parsing keywords element
+[ERROR]: 2017/06/28 16:05:54 worker.go:54: Error on proceeding article with id=0035895505
+[ERROR]: 2017/06/28 16:05:54 worker.go:55: error on parsing keywords element
+[ERROR]: 2017/06/28 16:06:10 worker.go:54: Error on proceeding article with id=0035891138
+[ERROR]: 2017/06/28 16:06:10 worker.go:55: error on parsing keywords element
+[ERROR]: 2017/06/28 16:06:26 worker.go:54: Error on proceeding article with id=0035854541
+[ERROR]: 2017/06/28 16:06:26 worker.go:55: error on parsing keywords element
+[ERROR]: 2017/06/28 16:06:42 worker.go:54: Error on proceeding article with id=0035942271
+[ERROR]: 2017/06/28 16:06:42 worker.go:55: error on parsing keywords element
+[ERROR]: 2017/06/28 16:06:58 worker.go:54: Error on proceeding article with id=0035890440
+[ERROR]: 2017/06/28 16:06:58 worker.go:55: error on parsing keywords element
+[ERROR]: 2017/06/28 16:07:15 worker.go:54: Error on proceeding article with id=0035827304
+[ERROR]: 2017/06/28 16:07:15 worker.go:55: error on parsing keywords element
+[ERROR]: 2017/06/28 16:07:31 worker.go:54: Error on proceeding article with id=0035680116
+[ERROR]: 2017/06/28 16:07:31 worker.go:55: error on parsing keywords element
+[ERROR]: 2017/06/28 16:07:47 worker.go:54: Error on proceeding article with id=0035900398
+[ERROR]: 2017/06/28 16:07:47 worker.go:55: error on parsing keywords element
+[ERROR]: 2017/06/28 16:32:14 main.go:27: dial tcp 127.0.0.1:3306: getsockopt: connection refused
+[ERROR]: 2017/06/28 16:32:18 worker.go:36: dial tcp 127.0.0.1:3306: getsockopt: connection refused
+[ERROR]: 2017/06/28 16:32:46 main.go:27: dial tcp [::1]:33060: getsockopt: connection refused
+[ERROR]: 2017/06/28 16:56:02 main.go:27: dial tcp [::1]:33060: getsockopt: connection refused
+[ERROR]: 2017/06/28 16:56:06 worker.go:36: dial tcp [::1]:33060: getsockopt: connection refused

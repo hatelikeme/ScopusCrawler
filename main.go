@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/visheratin/scopus-crawler/config"
-	"github.com/visheratin/scopus-crawler/crawler"
-	"github.com/visheratin/scopus-crawler/logger"
-	"github.com/visheratin/scopus-crawler/storage"
+	"./config"
+	"./crawler"
+	"./logger"
+	"./storage"
 )
 
 var (
@@ -21,7 +21,7 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	Storage = storage.MySQLStorage{User: "root", Password: "temppwd", Address: "localhost:3306", DbName: "mydb"}
+	Storage = storage.MySqlStorage{DBType: storage.MYSQL, User: "root", Password: "", Address: "localhost:33060", DbName: "test"}
 	err = Storage.Init(false)
 	if err != nil {
 		logger.Error.Println(err)

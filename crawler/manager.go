@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/visheratin/scopus-crawler/config"
-	"github.com/visheratin/scopus-crawler/storage"
+	"../config"
+	"../storage"
 )
 
 type Manager struct {

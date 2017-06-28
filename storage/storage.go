@@ -1,6 +1,6 @@
 package storage
 
-import "github.com/visheratin/scopus-crawler/models"
+import "../models"
 
 // GenericStorage is a general interface for data storage
 type GenericStorage interface {

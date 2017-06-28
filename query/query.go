@@ -9,8 +9,8 @@ import (
 
 	"fmt"
 
-	"github.com/visheratin/scopus-crawler/config"
-	"github.com/visheratin/scopus-crawler/storage"
+	"../config"
+	"../storage"
 )
 
 func MakeQuery(address string, id string, params map[string]string, timeoutSec int,
@@ -44,7 +44,10 @@ func MakeQuery(address string, id string, params map[string]string, timeoutSec i
 		defer resp.Body.Close()
 		body, err = ioutil.ReadAll(resp.Body)
 		fmt.Println(string(body))
-		storage.CreateFinishedRequest(request, string(body))
+		err = storage.CreateFinishedRequest(request, string(body))
+		if err != nil{
+			return nil, err
+		}
 	} else {
 		body = []byte(finishedRequest)
 	}
