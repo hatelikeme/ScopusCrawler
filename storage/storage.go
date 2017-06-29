@@ -4,7 +4,7 @@ import "../models"
 
 // GenericStorage is a general interface for data storage
 type GenericStorage interface {
-	Init(keepAlive bool) error
+	Init() error
 
 	CreateAuthor(author models.Author) error
 	UpdateAuthor(author models.Author) error

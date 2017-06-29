@@ -15,7 +15,7 @@ import (
 
 type Worker struct {
 	Config      config.Configuration
-	Storage     storage.GenericStorage
+	Storage     storage.MySqlStorage
 	DataSources []DataSource
 	Work        chan SearchRequest
 	WorkerQueue chan chan SearchRequest
@@ -60,6 +60,11 @@ func (worker *Worker) Start() {
 	}()
 }
 
+/*func extArticles(json string)([]models.Article, error)  {
+	result := []models.Article{}
+
+}
+*/
 func (worker *Worker) ExtractArticles(rawResponse map[string]interface{}) ([]models.Article, error) {
 	result := []models.Article{}
 	searchContainer, searchSucceed := rawResponse["search-results"]
@@ -150,37 +155,38 @@ func (worker *Worker) ExtractArticles(rawResponse map[string]interface{}) ([]mod
 
 			article.Affiliations = []models.Affiliation{}
 			affElem := entry["affiliation"]
-			affiliations := affElem.([]interface{})
-			for _, affVal := range affiliations {
-				affElem := affVal.(map[string]interface{})
-				affiliation := models.Affiliation{}
-				id, ok := affElem["afid"]
-				if ok && (id != nil) {
-					affiliation.ScopusID = id.(string)
-				} else {
-					affiliation.ScopusID = ""
+			if affElem != nil {
+				affiliations := affElem.([]interface{})
+				for _, affVal := range affiliations {
+					affElem := affVal.(map[string]interface{})
+					affiliation := models.Affiliation{}
+					id, ok := affElem["afid"]
+					if ok && (id != nil) {
+						affiliation.ScopusID = id.(string)
+					} else {
+						affiliation.ScopusID = ""
+					}
+					title, ok := affElem["affilname"]
+					if ok && (title != nil) {
+						affiliation.Title = title.(string)
+					} else {
+						affiliation.Title = ""
+					}
+					city, ok := affElem["affiliation-city"]
+					if ok && (city != nil) {
+						affiliation.City = city.(string)
+					} else {
+						affiliation.City = ""
+					}
+					country, ok := affElem["affiliation-country"]
+					if ok && (country != nil) {
+						affiliation.Country = country.(string)
+					} else {
+						affiliation.Country = ""
+					}
+					article.Affiliations = append(article.Affiliations, affiliation)
 				}
-				title, ok := affElem["affilname"]
-				if ok && (title != nil) {
-					affiliation.Title = title.(string)
-				} else {
-					affiliation.Title = ""
-				}
-				city, ok := affElem["affiliation-city"]
-				if ok && (city != nil){
-					affiliation.City = city.(string)
-				} else {
-					affiliation.City = ""
-				}
-				country, ok := affElem["affiliation-country"]
-				if ok && (country != nil){
-					affiliation.Country = country.(string)
-				} else {
-					affiliation.Country = ""
-				}
-				article.Affiliations = append(article.Affiliations, affiliation)
 			}
-
 			result = append(result, article)
 		}
 		return result, nil

@@ -11,18 +11,14 @@ import (
 	"./storage"
 )
 
-var (
-	Storage storage.GenericStorage
-)
-
 func main() {
 	err := logger.Init()
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	Storage = storage.MySqlStorage{DBType: storage.MYSQL, User: "root", Password: "", Address: "localhost:33060", DbName: "test"}
-	err = Storage.Init(false)
+	Storage := storage.MySqlStorage{DBType: storage.MYSQL, User: "root", Password: "temppwd", Address: "localhost:3306", DbName: "test"}
+	err = Storage.Init()
 	if err != nil {
 		logger.Error.Println(err)
 	}

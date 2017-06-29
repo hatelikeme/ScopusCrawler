@@ -15,7 +15,7 @@ type Manager struct {
 	DataSources []DataSource
 	Queue       chan SearchRequest
 	WorkerQueue chan chan SearchRequest
-	Storage     storage.GenericStorage
+	Storage     storage.MySqlStorage
 }
 
 func (manager *Manager) Init(dataSourcesPath string, workersNumber int) error {

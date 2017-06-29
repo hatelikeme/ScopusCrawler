@@ -14,7 +14,7 @@ import (
 )
 
 func MakeQuery(address string, id string, params map[string]string, timeoutSec int,
-	storage storage.GenericStorage, config config.Configuration) (map[string]interface{}, error) {
+	storage storage.MySqlStorage, config config.Configuration) (map[string]interface{}, error) {
 	requestPath := address
 	if id != "" {
 		requestPath = strings.Replace(requestPath, "{_id_}", id, -1)

@@ -9,6 +9,7 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 	"../logger"
 	"../models"
+	"log"
 )
 
 const(
@@ -108,9 +109,10 @@ const createFinishedRequestsTable = `CREATE TABLE IF NOT EXISTS finished_request
 	response TEXT
 )`
 
-func getDb(storage MySqlStorage) (*sql.DB, error) {
+func getDb(storage *MySqlStorage) (*sql.DB, error) {
 	switch storage.DBType {
 	case MYSQL:
+		log.Println("new Mysql connection")
 		path := fmt.Sprintf("%s:%s@(%s)/%s", storage.User, storage.Password, storage.Address, storage.DbName)
 		db, err := sql.Open("mysql", path)
 		if err != nil {
@@ -131,7 +133,7 @@ func getDb(storage MySqlStorage) (*sql.DB, error) {
 }
 
 // Init creates new storage or initializes the existing one
-func (storage MySqlStorage) Init(keepAlive bool) error {
+func (storage *MySqlStorage) Init() error {
 	db, err := getDb(storage)
 	if err != nil{
 		return err
@@ -176,40 +178,15 @@ func (storage MySqlStorage) Init(keepAlive bool) error {
 	if err != nil {
 		return err
 	}
-	if keepAlive {
-		storage.DB = db
-	} else {
-		db.Close()
-	}
+	storage.DB = db
 	storage.Initialized = true
 	return nil
 }
 
-func (storage MySqlStorage) Close() {
-	if storage.DB != nil {
-		storage.DB.Close()
-	}
-	storage.Initialized = false
-}
 
 func (storage MySqlStorage) getDBConnection() (*sql.DB, error) {
-	var err error
-	if !storage.Initialized {
-		err = storage.Init(false)
-		if err != nil {
-			return nil, err
-		}
-	}
-	var db *sql.DB
-	if storage.DB != nil {
-		db = storage.DB
-	} else {
-		db, err = getDb(storage)
-		if err != nil {
-			return nil, err
-		}
-	}
-	return db, nil
+	log.Println("storage.db is not null")
+	return storage.DB, nil
 }
 
 func (storage MySqlStorage) CreateAffiliation(affiliation models.Affiliation) error {
@@ -310,6 +287,7 @@ func (storage MySqlStorage) CreateArticle(article models.Article) error {
 		return err
 	}
 	req, _ := db.Prepare("REPLACE INTO articles VALUES (?, ?, ?, ?, ?, ?, ?)")
+	defer req.Close()
 	_, err = req.Exec(article.ScopusID, article.Title, article.Abstracts, article.PublicationDate,
 		article.CitationsCount, article.PublicationType, article.PublicationTitle)
 	if err != nil {
@@ -330,6 +308,7 @@ func (storage MySqlStorage) CreateArticle(article models.Article) error {
 		} else {
 			req, _ := db.Prepare("INSERT INTO article_area VALUES(?, ?)")
 			_, err = req.Exec(area.ScopusID, article.ScopusID)
+			req.Close()
 			if err != nil {
 				logger.Error.Println("Unable to connect article " + article.ScopusID + " with area " + area.ScopusID)
 				logger.Error.Println(err)
@@ -344,6 +323,7 @@ func (storage MySqlStorage) CreateArticle(article models.Article) error {
 		} else {
 			req, _ := db.Prepare("INSERT INTO article_author VALUES(?, ?)")
 			_, err = req.Exec(author.ScopusID, article.ScopusID)
+			req.Close()
 			if err != nil {
 				logger.Error.Println("Unable to connect article " + article.ScopusID + " with author " + author.ScopusID)
 				logger.Error.Println(err)
@@ -358,6 +338,7 @@ func (storage MySqlStorage) CreateArticle(article models.Article) error {
 		} else {
 			req, _ := db.Prepare("INSERT INTO article_keyword VALUES(?, ?)")
 			_, err = req.Exec(keyword.ID, article.ScopusID)
+			req.Close()
 			if err != nil {
 				logger.Error.Println("Unable to connect article " + article.ScopusID + " with keyword " + keyword.ID)
 				logger.Error.Println(err)
@@ -367,6 +348,7 @@ func (storage MySqlStorage) CreateArticle(article models.Article) error {
 	for _, reference := range article.References {
 		req, _ := db.Prepare("INSERT INTO article_article VALUES(?, ?)")
 		_, err = req.Exec(article.ScopusID, reference.ScopusID)
+		req.Close()
 		if err != nil {
 			logger.Error.Println("Unable to connect article " + article.ScopusID + " with reference " + reference.ScopusID)
 			logger.Error.Println(err)
@@ -386,6 +368,7 @@ func (storage MySqlStorage) UpdateArticle(article models.Article) error {
 		WHERE scopus_id = ?`)
 	_, err = req.Exec(article.Title, article.Abstracts, article.PublicationDate, article.CitationsCount,
 		article.PublicationType, article.PublicationTitle)
+	req.Close()
 	if err != nil {
 		return err
 	}
@@ -428,6 +411,7 @@ func (storage MySqlStorage) SearchArticles(fields map[string]string) ([]models.A
 	}
 	query = query[:(len(query) - 4)]
 	res, err := db.Query(query)
+	defer res.Close()
 	if err != nil {
 		return articles, err
 	}
@@ -451,6 +435,7 @@ func (storage MySqlStorage) DeleteArticle(scopusID string) error {
 	}
 	req, _ := db.Prepare(`DELETE FROM articles WHERE scopus_id = ?`)
 	_, err = req.Exec(scopusID)
+	req.Close()
 	if err != nil {
 		return err
 	}
@@ -465,6 +450,7 @@ func (storage MySqlStorage) CreateAuthor(author models.Author) error {
 	req, _ := db.Prepare("REPLACE INTO authors VALUES (?, ?, ?, ?, ?, ?)")
 	_, err = req.Exec(author.ScopusID, author.AffiliationID, author.Initials,
 		author.IndexedName, author.Surname, author.Name)
+	req.Close()
 	if err != nil {
 		return err
 	}
@@ -481,6 +467,7 @@ func (storage MySqlStorage) UpdateAuthor(author models.Author) error {
 		WHERE scopus_id = ?`)
 	_, err = req.Exec(author.AffiliationID, author.Initials,
 		author.IndexedName, author.Surname, author.Name, author.ScopusID)
+	req.Close()
 	if err != nil {
 		return err
 	}
@@ -496,6 +483,7 @@ func (storage MySqlStorage) GetAuthor(scopusID string) (models.Author, error) {
 	req, _ := db.Prepare(`SELECT DISTINCT * FROM authors WHERE scopus_id = ?`)
 	res, err := req.Query(scopusID)
 	defer res.Close()
+	req.Close()
 	if err != nil {
 		return author, err
 	}
@@ -755,6 +743,7 @@ func (storage MySqlStorage) DeleteSubjectArea(scopusID string) error {
 	}
 	req, _ := db.Prepare(`DELETE FROM subject_areas WHERE scopus_id = ?`)
 	_, err = req.Exec(scopusID)
+	req.Close()
 	if err != nil {
 		return err
 	}
