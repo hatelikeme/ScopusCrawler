@@ -2,15 +2,15 @@ package crawler
 
 import (
 	"errors"
-	"strconv"
-	"strings"
-
-	"github.com/satori/go.uuid"
 	"../config"
 	"../logger"
 	"../models"
 	"../query"
 	"../storage"
+	"github.com/tidwall/gjson"
+	"strconv"
+	"strings"
+	"hash/fnv"
 )
 
 type Worker struct {
@@ -49,7 +49,7 @@ func (worker *Worker) Start() {
 					}
 				}
 				for _, article := range articles {
-					err := worker.ProceedArticle(article, articleDs, 0)
+					err := worker.ProceedArticle(&article, articleDs, 0)
 					if err != nil {
 						logger.Error.Println("Error on proceeding article with id=" + article.ScopusID)
 						logger.Error.Println(err)
@@ -60,271 +60,219 @@ func (worker *Worker) Start() {
 	}()
 }
 
-/*func extArticles(json string)([]models.Article, error)  {
-	result := []models.Article{}
-
+func ExtractEntry(entry gjson.Result, article *models.Article) {
+	entry = entry.Get("coredata")
+	ScopusID := entry.Get("dc:identifier")
+	if ScopusID.Exists() {
+		article.ScopusID = strings.Replace(ScopusID.Str, "SCOPUS_ID:", "", 1)
+	}
+	title := entry.Get("dc:title")
+	if title.Exists() {
+		article.Title = title.Str
+	}
+	citedby := entry.Get("citedby-count")
+	if citedby.Exists() {
+		article.CitationsCount = int(citedby.Int())
+	}
+	pubdate := entry.Get("prism:coverDate")
+	if pubdate.Exists() {
+		article.PublicationDate = pubdate.Str
+	}
+	pubtype := entry.Get("prism:aggregationType")
+	if pubtype.Exists() {
+		article.PublicationType = pubtype.Str
+	}
+	pubname := entry.Get("prism:publicationName")
+	if pubname.Exists() {
+		article.PublicationTitle = pubname.Str
+	}
+	abstracts := entry.Get("dc:description")
+	if abstracts.Exists() {
+		article.Abstracts = abstracts.Str
+	}
 }
-*/
-func (worker *Worker) ExtractArticles(rawResponse map[string]interface{}) ([]models.Article, error) {
+
+func ExtractAuthors(entry gjson.Result, article *models.Article) {
+	entry = entry.Get("authors")
+	authors := []models.Author{}
+	for _, author := range entry.Get("author").Array(){
+		aut := models.Author{}
+		aScopusID := author.Get("@auid")
+		if aScopusID.Exists() {
+			aut.ScopusID = aScopusID.Str
+		}
+		name := author.Get("preferred-name.ce:given-name")
+		if name.Exists() {
+			aut.Name = name.Str
+		}
+		surname := author.Get("ce:surname")
+		if surname.Exists() {
+			aut.Surname = surname.Str
+		}
+		givenName := author.Get("ce:indexed-name")
+		if givenName.Exists() {
+			aut.IndexedName = givenName.Str
+		}
+		initials := author.Get("ce:initials")
+		if initials.Exists() {
+			aut.Initials = initials.Str
+		}
+		afid := author.Get("affiliation.@id")
+		if afid.Exists() {
+			aut.AffiliationID = afid.Str
+		}
+		authors = append(authors, aut)
+	}
+	article.Authors = authors
+}
+
+func ExtractAffiliation(entry gjson.Result, article *models.Article){
+	affiliation := []models.Affiliation{}
+	for _, res := range entry.Get("affiliation").Array(){
+		aff := models.Affiliation{}
+		afid := res.Get("@id")
+		if afid.Exists() {
+			aff.ScopusID = afid.Str
+		}
+		affname := res.Get("affilname")
+		if affname.Exists() {
+			aff.Title = affname.Str
+		}
+		affcity := res.Get("affiliation-city")
+		if affcity.Exists() {
+			aff.City = affcity.Str
+		}
+		affcountry := res.Get("affiliation-country")
+		if affcountry.Exists() {
+			aff.Country = affcountry.Str
+		}
+		affiliation = append(affiliation, aff)
+	}
+	article.Affiliations = affiliation
+}
+
+func ExtractScopusID(entry gjson.Result)(article models.Article)  {
+	ScopusID := entry.Get("dc:identifier")
+	if ScopusID.Exists() {
+		article.ScopusID = strings.Replace(ScopusID.Str, "SCOPUS_ID:", "", 1)
+	}
+	return article
+}
+
+func (worker *Worker) ExtractArticles(rawResponse string) ([]models.Article, error) {
 	result := []models.Article{}
-	searchContainer, searchSucceed := rawResponse["search-results"]
-	if searchSucceed {
-		rawEntries, ok := searchContainer.(map[string]interface{})["entry"]
-		if !ok {
-			return result, errors.New("error on parsing search-results element")
-		}
-		entries, ok := rawEntries.([]interface{})
-		if !ok {
-			return result, errors.New("error on parsing entries element")
-		}
-		for _, value := range entries {
-			entry, ok := value.(map[string]interface{})
-			if !ok {
-				continue
-			}
-			id := entry["dc:identifier"].(string)
-			scopusID := strings.Replace(id, "SCOPUS_ID:", "", -1)
-			article := models.Article{
-				ScopusID: scopusID,
-			}
-			title, ok := entry["dc:title"]
-			if ok {
-				article.Title = title.(string)
-			}
-			abstracts, ok := entry["dc:description"]
-			if ok {
-				article.Abstracts = abstracts.(string)
-			}
-			citations, ok := entry["citedby-count"]
-			if ok {
-				count, err := strconv.Atoi(citations.(string))
-				if err == nil {
-					article.CitationsCount = count
-				}
-			}
-			pubDate, ok := entry["prism:coverDate"]
-			if ok {
-				article.PublicationDate = pubDate.(string)
-			}
-			pubType, ok := entry["prism:aggregationType"]
-			if ok {
-				article.PublicationType = pubType.(string)
-			}
-			pubName, ok := entry["prism:publicationName"]
-			if ok {
-				article.PublicationTitle = pubName.(string)
-			}
+	sresults := gjson.Get(rawResponse, "search-results")
 
-			article.Authors = []models.Author{}
-			authorsElem := entry["author"]
-			authors := authorsElem.([]interface{})
-			for _, authorVal := range authors {
-				authorElem := authorVal.(map[string]interface{})
-				author := models.Author{}
-				id, ok := authorElem["authid"]
-				if ok {
-					author.ScopusID = id.(string)
-				}
-				name, ok := authorElem["authname"]
-				if ok {
-					author.IndexedName = name.(string)
-				}
-				surname, ok := authorElem["surname"]
-				if ok {
-					author.Surname = surname.(string)
-				}
-				firstname, ok := authorElem["given-name"]
-				if ok {
-					author.Name = firstname.(string)
-				}
-				author.Affiliation = models.Affiliation{}
-				authAffElem := authorElem["afid"]
-				if authAffElem != nil {
-					authAff := authAffElem.([]interface{})
-					if len(authAff) > 0 {
-						affID, ok := authAff[0].(map[string]interface{})["$"]
-						if ok {
-							author.AffiliationID = affID.(string)
-						}
-					}
-				} else {
-					author.AffiliationID = ""
-				}
-				article.Authors = append(article.Authors, author)
-			}
-
-			article.Affiliations = []models.Affiliation{}
-			affElem := entry["affiliation"]
-			if affElem != nil {
-				affiliations := affElem.([]interface{})
-				for _, affVal := range affiliations {
-					affElem := affVal.(map[string]interface{})
-					affiliation := models.Affiliation{}
-					id, ok := affElem["afid"]
-					if ok && (id != nil) {
-						affiliation.ScopusID = id.(string)
-					} else {
-						affiliation.ScopusID = ""
-					}
-					title, ok := affElem["affilname"]
-					if ok && (title != nil) {
-						affiliation.Title = title.(string)
-					} else {
-						affiliation.Title = ""
-					}
-					city, ok := affElem["affiliation-city"]
-					if ok && (city != nil) {
-						affiliation.City = city.(string)
-					} else {
-						affiliation.City = ""
-					}
-					country, ok := affElem["affiliation-country"]
-					if ok && (country != nil) {
-						affiliation.Country = country.(string)
-					} else {
-						affiliation.Country = ""
-					}
-					article.Affiliations = append(article.Affiliations, affiliation)
-				}
-			}
+	if sresults.Exists() {
+		for _, entry := range sresults.Get("entry").Array(){
+			article := ExtractScopusID(entry)
 			result = append(result, article)
 		}
 		return result, nil
+	} else {
+		return nil, errors.New("empty search response")
 	}
-	return []models.Article{}, errors.New("empty search response")
 }
 
-func (worker *Worker) ProceedArticle(article models.Article, articleDs DataSource, depth int) error {
+func ExtractKeywords(response gjson.Result, article *models.Article) {
+	for _, keyword := range response.Get("authkeywords.author-keyword").Array(){
+		kw := models.Keyword{}
+		kw.Value = keyword.Get("$").Str
+		h := fnv.New64a()
+		h.Write([]byte(kw.Value))
+		kw.ID = strconv.Itoa(int(h.Sum64()))
+		article.Keywords = append(article.Keywords, kw)
+	}
+}
+
+func ExtractSubjectArea(response gjson.Result, article *models.Article) {
+	for _, subarea := range response.Get("subject-areas.subject-area").Array(){
+		subjectarea := models.SubjectArea{}
+		title := subarea.Get("@abbrev")
+		if title.Exists() {
+			subjectarea.Title = title.Str
+		}
+		code := subarea.Get("@code")
+		if code.Exists() {
+			subjectarea.Code = subarea.Str
+		}
+		desc := subarea.Get("$")
+		if desc.Exists() {
+			subjectarea.Description = desc.Str
+		}
+		hash := fnv.New64a()
+		hash.Write([]byte(subjectarea.Code + subjectarea.Description + subjectarea.Title))
+		subjectarea.ScopusID = strconv.Itoa(int(hash.Sum64()))
+		article.SubjectAreas = append(article.SubjectAreas, subjectarea)
+	}
+}
+
+func ExtractRefAuthors(refinfo gjson.Result) (authors []models.Author) {
+	for _, refaut := range refinfo.Get("ref-authors.author").Array(){
+		author := models.Author{}
+		initials := refaut.Get("ce:initials")
+		if initials.Exists() {
+			author.Initials = initials.Str
+		}
+		indexedName := refaut.Get("ce:indexed-name")
+		if indexedName.Exists() {
+			author.IndexedName = indexedName.Str
+		}
+		surname := refaut.Get("ce:surname")
+		if surname.Exists() {
+			author.Surname = surname.Str
+		}
+		authors = append(authors, author)
+	}
+	return authors
+}
+
+func ExtractReferences(response gjson.Result) ([]models.Article) {
+	records := []models.Article{}
+	for _, bibrecord := range response.Get("item.bibrecord.tail.bibliography.reference").Array(){
+		record := models.Article{}
+		refinfo := bibrecord.Get("ref-info")
+		title := refinfo.Get("ref-sourcetitle")
+		if title.Exists() {
+			record.Title = title.Str
+		}
+		year := refinfo.Get("ref-publicationyear")
+		if year.Exists() {
+			record.PublicationDate = year.Str
+		}
+		scopusID := refinfo.Get("refd-itemidlist.itemid.$")
+		if scopusID.Exists() {
+			record.ScopusID = strings.Replace(scopusID.Str, "SCOPUS_ID:", "", 1)
+		}
+		record.Authors = ExtractRefAuthors(refinfo)
+		records = append(records, record)
+	}
+	return records
+}
+
+func (worker *Worker) ProceedArticle(article *models.Article, articleDs DataSource, depth int) error {
 	articleData, err := query.MakeQuery(articleDs.Path, article.ScopusID, map[string]string{}, worker.Config.RequestTimeout,
 		worker.Storage, worker.Config)
 	if err != nil {
 		logger.Error.Println("Error on requesting data for id=" + article.ScopusID)
 		logger.Error.Println(err)
 	}
-	articleContainer, articleRetrieved := articleData["abstracts-retrieval-response"]
-	if articleRetrieved && (articleContainer != nil) {
-		article.Keywords = []models.Keyword{}
-		keywordsContainer, ok := articleContainer.(map[string]interface{})["authkeywords"]
-		if !ok {
-			return errors.New("error on parsing authkeywords element")
+	response := gjson.Get(articleData, "abstracts-retrieval-response")
+	ExtractAffiliation(response, article)
+	ExtractEntry(response, article)
+	ExtractAuthors(response, article)
+	ExtractKeywords(response, article)
+	ExtractSubjectArea(response, article)
+	references := ExtractReferences(response)
+	if depth < worker.Config.ReferencesDepth {
+		for _, ref := range references {
+			worker.ProceedArticle(&ref, articleDs, depth+1)
+			article.References = append(article.References, ref)
 		}
-		var keywordsVal interface{}
-		if keywordsContainer != nil {
-			keywordsVal, ok = keywordsContainer.(map[string]interface{})["author-keyword"]
-			if !ok {
-				return errors.New("error on parsing author-keyword element")
-			}
-		}
-		keywords, ok := keywordsVal.([]interface{})
-		if !ok {
-			return errors.New("error on parsing keywords element")
-		}
-		for _, keywordVal := range keywords {
-			keyword := models.Keyword{}
-			keyword.ID = uuid.NewV4().String()
-			keywordElem := keywordVal.(map[string]interface{})
-			value, ok := keywordElem["$"]
-			if ok {
-				keyword.Value = value.(string)
-				article.Keywords = append(article.Keywords, keyword)
-			}
-		}
-
-		article.SubjectAreas = []models.SubjectArea{}
-		areaContainer, ok := articleContainer.(map[string]interface{})["subject-areas"]
-		if !ok {
-			return errors.New("error on parsing subject-areas element")
-		}
-		areasVal, ok := areaContainer.(map[string]interface{})["subject-area"]
-		if !ok {
-			return errors.New("error on parsing subject-area element")
-		}
-		areas, ok := areasVal.([]interface{})
-		if !ok {
-			return errors.New("error on parsing subject areas element")
-		}
-		for _, areaVal := range areas {
-			area := models.SubjectArea{}
-			areaElem := areaVal.(map[string]interface{})
-			name, ok := areaElem["$"]
-			if ok {
-				area.Description = name.(string)
-			}
-			code, ok := areaElem["@code"]
-			if ok {
-				area.Code = code.(string)
-			}
-			abbrev, ok := areaElem["@abbrev"]
-			if ok {
-				area.Title = abbrev.(string)
-			}
-			article.SubjectAreas = append(article.SubjectAreas, area)
-		}
-
-		article.References = []models.Article{}
-		refContainer, ok := articleContainer.(map[string]interface{})["item"]
-		if !ok {
-			return errors.New("error on parsing item element")
-		}
-		refContainer, ok = refContainer.(map[string]interface{})["bibrecord"]
-		if !ok {
-			return errors.New("error on parsing bibrecord element")
-		}
-		refContainer, ok = refContainer.(map[string]interface{})["tail"]
-		if !ok {
-			return errors.New("error on parsing tail element")
-		}
-		refContainer, ok = refContainer.(map[string]interface{})["bibliography"]
-		if !ok {
-			return errors.New("error on parsing bibliography element")
-		}
-		refContainer, ok = refContainer.(map[string]interface{})["reference"]
-		if !ok {
-			return errors.New("error on parsing reference element")
-		}
-		references, ok := refContainer.([]interface{})
-		if !ok {
-			return errors.New("error on parsing references element")
-		}
-		for _, refVal := range references {
-			reference := models.Article{}
-			refElem := refVal.(map[string]interface{})
-			refData, ok := refElem["ref-info"]
-			if !ok {
-				continue
-			}
-			refData, ok = refData.(map[string]interface{})["refd-itemidlist"]
-			if !ok {
-				continue
-			}
-			refData, ok = refData.(map[string]interface{})["itemid"]
-			if !ok {
-				continue
-			}
-			refElem = refData.(map[string]interface{})
-			idType, ok := refElem["@idtype"]
-			if ok && idType == "SGR" {
-				id, ok := refElem["$"]
-				if ok {
-					reference.ScopusID = id.(string)
-					if depth < worker.Config.ReferencesDepth {
-						worker.ProceedArticle(reference, articleDs, depth+1)
-					}
-					article.References = append(article.References, reference)
-				}
-			}
-		}
-		for _, reference := range article.References {
-			err := worker.Storage.CreateArticle(reference)
-			if err != nil {
-				return err
-			}
-		}
-		err := worker.Storage.CreateArticle(article)
-		if err != nil {
-			return err
-		}
-		return nil
 	}
-	return errors.New("empty article response")
+	err = worker.Storage.CreateArticle(*article)
+	if err != nil {
+		return errors.New("Error writing article to database")
+	}
+	return nil
 }

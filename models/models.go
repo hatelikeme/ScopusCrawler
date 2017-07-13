@@ -36,7 +36,7 @@ type Article struct {
 }
 
 type SubjectArea struct {
-	ScopusID    string `json:"@code"`
+	ScopusID    string 	  `json:"@code"`
 	Title       string    `json:"@abbrev"`
 	Code        string    `json:"@code"`
 	Description string    `json:"@_fa"`

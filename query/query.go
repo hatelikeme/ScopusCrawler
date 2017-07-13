@@ -1,7 +1,6 @@
 package query
 
 import (
-	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -14,7 +13,7 @@ import (
 )
 
 func MakeQuery(address string, id string, params map[string]string, timeoutSec int,
-	storage storage.MySqlStorage, config config.Configuration) (map[string]interface{}, error) {
+	storage storage.MySqlStorage, config config.Configuration) (string, error) {
 	requestPath := address
 	if id != "" {
 		requestPath = strings.Replace(requestPath, "{_id_}", id, -1)
@@ -23,7 +22,7 @@ func MakeQuery(address string, id string, params map[string]string, timeoutSec i
 	for key, value := range params {
 		requestPath += key + "=" + value + "&"
 	}
-	var data map[string]interface{}
+	var data string
 	var body []byte
 	finishedRequest, _ := storage.GetFinishedRequest(requestPath)
 	if finishedRequest == "" {
@@ -33,28 +32,25 @@ func MakeQuery(address string, id string, params map[string]string, timeoutSec i
 		fmt.Println(requestPath)
 		req, err := http.NewRequest("GET", requestPath, nil)
 		if err != nil {
-			return nil, err
+			return "", err
 		}
 		client := &http.Client{}
 		resp, err := client.Do(req)
 		if err != nil {
 			config.RemoveKey(authKey)
-			return nil, err
+			return "", err
 		}
 		defer resp.Body.Close()
 		body, err = ioutil.ReadAll(resp.Body)
-		fmt.Println(string(body))
-		err = storage.CreateFinishedRequest(request, string(body))
+		data = string(body)
+		err = storage.CreateFinishedRequest(request, data)
 		if err != nil{
-			return nil, err
+			return "", err
 		}
 	} else {
-		body = []byte(finishedRequest)
+		data = finishedRequest
 	}
-	err := json.Unmarshal(body, &data)
-	if err != nil {
-		return nil, err
-	}
+
 	duration := time.Duration(timeoutSec) * time.Second
 	time.Sleep(duration)
 	return data, nil

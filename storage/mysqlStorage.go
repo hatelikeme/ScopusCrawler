@@ -7,6 +7,7 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/lib/pq"
 	"../logger"
 	"../models"
 	"log"
@@ -15,6 +16,7 @@ import (
 const(
 	MYSQL = iota
 	SQLITE
+	POSTGRES
 )
 
 type DatabaseType uint8
@@ -36,8 +38,7 @@ const createAuthorsTable = `CREATE TABLE IF NOT EXISTS authors (
 	indexed_name TEXT,
 	surname TEXT,
 	name TEXT,
-	PRIMARY KEY (scopus_id),
-	FOREIGN KEY(affiliation_id) REFERENCES affiliations(scopus_id)
+	PRIMARY KEY (scopus_id)
 )`
 
 const createAffiliationsTable = `CREATE TABLE IF NOT EXISTS affiliations (
@@ -117,16 +118,21 @@ func getDb(storage *MySqlStorage) (*sql.DB, error) {
 		db, err := sql.Open("mysql", path)
 		if err != nil {
 			return nil, err
-		} else {
-			return db, nil
 		}
+			return db, nil
 	case SQLITE:
 		db, err := sql.Open("sqlite3", storage.DbName)
 		if err != nil{
 			return nil, err
-		} else {
-			return db, nil
 		}
+			return db, nil
+	case POSTGRES:
+		log.Println("new Postgres connection")
+		db, err := sql.Open("postgres", "user=gk91 dbname=test sslmode =disable")
+		if err != nil{
+			return nil, err
+		}
+		return db, nil
 	default:
 		return nil, errors.New("Unidentified database")
 	}
@@ -184,12 +190,11 @@ func (storage *MySqlStorage) Init() error {
 }
 
 
-func (storage MySqlStorage) getDBConnection() (*sql.DB, error) {
-	log.Println("storage.db is not null")
+func (storage *MySqlStorage) getDBConnection() (*sql.DB, error) {
 	return storage.DB, nil
 }
 
-func (storage MySqlStorage) CreateAffiliation(affiliation models.Affiliation) error {
+func (storage *MySqlStorage) CreateAffiliation(affiliation models.Affiliation) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -203,7 +208,7 @@ func (storage MySqlStorage) CreateAffiliation(affiliation models.Affiliation) er
 	return nil
 }
 
-func (storage MySqlStorage) UpdateAffiliation(affiliation models.Affiliation) error {
+func (storage *MySqlStorage) UpdateAffiliation(affiliation models.Affiliation) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -219,7 +224,7 @@ func (storage MySqlStorage) UpdateAffiliation(affiliation models.Affiliation) er
 	return nil
 }
 
-func (storage MySqlStorage) GetAffiliation(scopusID string) (models.Affiliation, error) {
+func (storage *MySqlStorage) GetAffiliation(scopusID string) (models.Affiliation, error) {
 	var affiliation models.Affiliation
 	db, err := storage.getDBConnection()
 	if err != nil {
@@ -242,7 +247,7 @@ func (storage MySqlStorage) GetAffiliation(scopusID string) (models.Affiliation,
 	return affiliation, errors.New("data was not found in the storage")
 }
 
-func (storage MySqlStorage) SearchAffiliations(fields map[string]string) ([]models.Affiliation, error) {
+func (storage *MySqlStorage) SearchAffiliations(fields map[string]string) ([]models.Affiliation, error) {
 	var affiliations []models.Affiliation
 	db, err := storage.getDBConnection()
 	if err != nil {
@@ -269,7 +274,7 @@ func (storage MySqlStorage) SearchAffiliations(fields map[string]string) ([]mode
 	return affiliations, nil
 }
 
-func (storage MySqlStorage) DeleteAffiliation(scopusID string) error {
+func (storage *MySqlStorage) DeleteAffiliation(scopusID string) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -281,7 +286,7 @@ func (storage MySqlStorage) DeleteAffiliation(scopusID string) error {
 	}
 	return nil
 }
-func (storage MySqlStorage) CreateArticle(article models.Article) error {
+func (storage *MySqlStorage) CreateArticle(article models.Article) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -357,7 +362,7 @@ func (storage MySqlStorage) CreateArticle(article models.Article) error {
 	return nil
 }
 
-func (storage MySqlStorage) UpdateArticle(article models.Article) error {
+func (storage *MySqlStorage) UpdateArticle(article models.Article) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -375,7 +380,7 @@ func (storage MySqlStorage) UpdateArticle(article models.Article) error {
 	return nil
 }
 
-func (storage MySqlStorage) GetArticle(scopusID string) (models.Article, error) {
+func (storage *MySqlStorage) GetArticle(scopusID string) (models.Article, error) {
 	var article models.Article
 	db, err := storage.getDBConnection()
 	if err != nil {
@@ -399,7 +404,7 @@ func (storage MySqlStorage) GetArticle(scopusID string) (models.Article, error) 
 	return article, errors.New("data was not found in the storage")
 }
 
-func (storage MySqlStorage) SearchArticles(fields map[string]string) ([]models.Article, error) {
+func (storage *MySqlStorage) SearchArticles(fields map[string]string) ([]models.Article, error) {
 	var articles []models.Article
 	db, err := storage.getDBConnection()
 	if err != nil {
@@ -428,7 +433,7 @@ func (storage MySqlStorage) SearchArticles(fields map[string]string) ([]models.A
 	return articles, nil
 }
 
-func (storage MySqlStorage) DeleteArticle(scopusID string) error {
+func (storage *MySqlStorage) DeleteArticle(scopusID string) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -442,7 +447,7 @@ func (storage MySqlStorage) DeleteArticle(scopusID string) error {
 	return nil
 }
 
-func (storage MySqlStorage) CreateAuthor(author models.Author) error {
+func (storage *MySqlStorage) CreateAuthor(author models.Author) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -457,7 +462,7 @@ func (storage MySqlStorage) CreateAuthor(author models.Author) error {
 	return nil
 }
 
-func (storage MySqlStorage) UpdateAuthor(author models.Author) error {
+func (storage *MySqlStorage) UpdateAuthor(author models.Author) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -474,7 +479,7 @@ func (storage MySqlStorage) UpdateAuthor(author models.Author) error {
 	return nil
 }
 
-func (storage MySqlStorage) GetAuthor(scopusID string) (models.Author, error) {
+func (storage *MySqlStorage) GetAuthor(scopusID string) (models.Author, error) {
 	var author models.Author
 	db, err := storage.getDBConnection()
 	if err != nil {
@@ -497,7 +502,7 @@ func (storage MySqlStorage) GetAuthor(scopusID string) (models.Author, error) {
 	return author, errors.New("data was not found in the storage")
 }
 
-func (storage MySqlStorage) SearchAuthors(fields map[string]string) ([]models.Author, error) {
+func (storage *MySqlStorage) SearchAuthors(fields map[string]string) ([]models.Author, error) {
 	var authors []models.Author
 	db, err := storage.getDBConnection()
 	if err != nil {
@@ -524,7 +529,7 @@ func (storage MySqlStorage) SearchAuthors(fields map[string]string) ([]models.Au
 	return authors, nil
 }
 
-func (storage MySqlStorage) DeleteAuthor(scopusID string) error {
+func (storage *MySqlStorage) DeleteAuthor(scopusID string) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -537,7 +542,7 @@ func (storage MySqlStorage) DeleteAuthor(scopusID string) error {
 	return nil
 }
 
-func (storage MySqlStorage) CreateFinishedRequest(request string, response string) error {
+func (storage *MySqlStorage) CreateFinishedRequest(request string, response string) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -551,7 +556,7 @@ func (storage MySqlStorage) CreateFinishedRequest(request string, response strin
 	return nil
 }
 
-func (storage MySqlStorage) GetFinishedRequest(request string) (string, error) {
+func (storage *MySqlStorage) GetFinishedRequest(request string) (string, error) {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return "", err
@@ -571,7 +576,7 @@ func (storage MySqlStorage) GetFinishedRequest(request string) (string, error) {
 	return "", nil
 }
 
-func (storage MySqlStorage) CreateKeyword(keyword models.Keyword) error {
+func (storage *MySqlStorage) CreateKeyword(keyword models.Keyword) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -584,7 +589,7 @@ func (storage MySqlStorage) CreateKeyword(keyword models.Keyword) error {
 	return nil
 }
 
-func (storage MySqlStorage) UpdateKeyword(keyword models.Keyword) error {
+func (storage *MySqlStorage) UpdateKeyword(keyword models.Keyword) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -597,7 +602,7 @@ func (storage MySqlStorage) UpdateKeyword(keyword models.Keyword) error {
 	return nil
 }
 
-func (storage MySqlStorage) GetKeyword(id string) (models.Keyword, error) {
+func (storage *MySqlStorage) GetKeyword(id string) (models.Keyword, error) {
 	var keyword models.Keyword
 	db, err := storage.getDBConnection()
 	if err != nil {
@@ -619,7 +624,7 @@ func (storage MySqlStorage) GetKeyword(id string) (models.Keyword, error) {
 	return keyword, errors.New("data was not found in the storage")
 }
 
-func (storage MySqlStorage) SearchKeywords(fields map[string]string) ([]models.Keyword, error) {
+func (storage *MySqlStorage) SearchKeywords(fields map[string]string) ([]models.Keyword, error) {
 	var keywords []models.Keyword
 	db, err := storage.getDBConnection()
 	if err != nil {
@@ -645,7 +650,7 @@ func (storage MySqlStorage) SearchKeywords(fields map[string]string) ([]models.K
 	return keywords, nil
 }
 
-func (storage MySqlStorage) DeleteKeyword(id string) error {
+func (storage *MySqlStorage) DeleteKeyword(id string) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -658,7 +663,7 @@ func (storage MySqlStorage) DeleteKeyword(id string) error {
 	return nil
 }
 
-func (storage MySqlStorage) CreateSubjectArea(subjectArea models.SubjectArea) error {
+func (storage *MySqlStorage) CreateSubjectArea(subjectArea models.SubjectArea) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
@@ -686,7 +691,7 @@ func (storage MySqlStorage) UpdateSubjectArea(subjectArea models.SubjectArea) er
 	return nil
 }
 
-func (storage MySqlStorage) GetSubjectArea(scopusID string) (models.SubjectArea, error) {
+func (storage *MySqlStorage) GetSubjectArea(scopusID string) (models.SubjectArea, error) {
 	var subjectArea models.SubjectArea
 	db, err := storage.getDBConnection()
 	if err != nil {
@@ -709,7 +714,7 @@ func (storage MySqlStorage) GetSubjectArea(scopusID string) (models.SubjectArea,
 	return subjectArea, errors.New("data was not found in the storage")
 }
 
-func (storage MySqlStorage) SearchSubjectAreas(fields map[string]string) ([]models.SubjectArea, error) {
+func (storage *MySqlStorage) SearchSubjectAreas(fields map[string]string) ([]models.SubjectArea, error) {
 	var subjectAreas []models.SubjectArea
 	db, err := storage.getDBConnection()
 	if err != nil {
@@ -736,7 +741,7 @@ func (storage MySqlStorage) SearchSubjectAreas(fields map[string]string) ([]mode
 	return subjectAreas, nil
 }
 
-func (storage MySqlStorage) DeleteSubjectArea(scopusID string) error {
+func (storage *MySqlStorage) DeleteSubjectArea(scopusID string) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
 		return err
