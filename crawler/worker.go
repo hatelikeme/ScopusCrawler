@@ -19,6 +19,7 @@ type Worker struct {
 	DataSources []DataSource
 	Work        chan SearchRequest
 	WorkerQueue chan chan SearchRequest
+	Queue		chan SearchRequest
 }
 
 func (worker *Worker) Start() {
@@ -48,12 +49,15 @@ func (worker *Worker) Start() {
 						break
 					}
 				}
-				for _, article := range articles {
-					err := worker.ProceedArticle(&article, articleDs, 0)
-					if err != nil {
-						logger.Error.Println("Error on proceeding article with id=" + article.ScopusID)
-						logger.Error.Println(err)
-					}
+				for _, article := range articles{
+					worker.Queue <- SearchRequest{"article", articleDs, article.ScopusID, nil}
+				}
+			case "article":
+				art := models.Article{ScopusID:work.ID}
+				err := worker.ProceedArticle(&art, work.Source, 0)
+				if err != nil{
+					logger.Error.Println(err)
+					return
 				}
 			}
 		}

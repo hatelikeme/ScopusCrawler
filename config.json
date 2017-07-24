@@ -3,7 +3,7 @@
 	"listenPort": "12345",
 	"maxSearchPages": 100,
 	"resultsPerPage": 25,
-	"referencesDepth": 1,
+	"referencesDepth": 0,
 	"requestTimeout": 15,
-	"workersNumber": 1
+	"workersNumber": 144
 }

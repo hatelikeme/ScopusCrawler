@@ -3,12 +3,14 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"os"
-
 	"./config"
 	"./crawler"
 	"./logger"
 	"./storage"
+	"os"
+	"net/http"
+	"github.com/gorilla/mux"
+	"io"
 )
 
 func main() {
@@ -22,10 +24,14 @@ func main() {
 	if err != nil {
 		logger.Error.Println(err)
 	}
-	config, _ := config.ReadConfig("config.json")
+	conf, _ := config.ReadConfig("config.json")
 	manager := crawler.Manager{}
 	manager.Storage = Storage
-	manager.Init("data-sources.json", config.WorkersNumber)
+	manager.Init("data-sources.json", conf.WorkersNumber)
+
+	router := mux.NewRouter()
+	router.HandleFunc("/request", RequestHandler(&manager))
+	router.HandleFunc("/")
 	req, err := readRequest("request.json")
 	if err != nil {
 		logger.Error.Println(err)
@@ -39,18 +45,26 @@ func main() {
 	fmt.Scanln()
 }
 
-func readRequest(requestPath string) (crawler.SearchRequest, error) {
+func readRequest(request io.ReadCloser) (crawler.SearchRequest, error) {
 	var req crawler.SearchRequest
-	file, err := os.Open(requestPath)
-	if err != nil {
-		logger.Error.Println("Unable to open request file.")
-		return req, err
-	}
-	decoder := json.NewDecoder(file)
-	err = decoder.Decode(&req)
+	decoder := json.NewDecoder(request)
+	err := decoder.Decode(&req)
 	if err != nil {
 		logger.Error.Println(err)
 		return req, err
 	}
 	return req, nil
+}
+
+
+func RequestHandler(manager *crawler.Manager) http.HandlerFunc {
+	fn := func(writer http.ResponseWriter, request *http.Request) {
+		searchRequest, err := readRequest(request.Body)
+		if err != nil {
+			writer.WriteHeader(http.StatusInternalServerError)
+		}
+		writer.WriteHeader(http.StatusOK)
+		manager.StartCrawling(searchRequest)
+	}
+	return http.HandlerFunc(fn)
 }

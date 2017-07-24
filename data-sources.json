@@ -11,7 +11,7 @@
     },
     {
         "name": "author",
-        "path": "http://api.elsevier.com/content/author/author_id/{_id_}?httpAccept=application/json&view=ENHANCED&",
+        "path": "http://api.elsevier.com/content/search/scopus?sort=citedby-count&httpAccept=application/json&view=COMPLETE&query=au-id({_id_})&",
         "keys": []
     }
 ]

@@ -10,3 +10,12 @@ type Coredata struct{
 	affiliation Affiliation
 }
 
+type Request struct {
+	sourceName string `json: "sourceName"`
+	fields Fields
+}
+
+type Fields struct {
+
+}
+
