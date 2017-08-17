@@ -11,6 +11,7 @@ import (
 	"strconv"
 	"strings"
 	"hash/fnv"
+	"log"
 )
 
 type Worker struct {
@@ -31,6 +32,12 @@ func (worker *Worker) Start() {
 			work := <-worker.Work
 			ds := work.Source
 			switch work.SourceName {
+			case "PagesNum":
+				requests := worker.formPagesSearchField(work)
+				for _, req := range requests{
+					req.SourceName = "search"
+					worker.Queue <- req
+				}
 			case "search":
 				data, err := query.MakeQuery(ds.Path, "", work.Fields, worker.Config.RequestTimeout, worker.Storage, worker.Config)
 				if err != nil {
@@ -62,6 +69,49 @@ func (worker *Worker) Start() {
 			}
 		}
 	}()
+}
+
+func (worker *Worker)getMaxResults(req SearchRequest) (int, error){
+	path := req.Source.Path
+	data, err := query.MakeQuery(path, "", req.Fields, worker.Config.RequestTimeout, worker.Storage, worker.Config)
+	if err != nil{
+		return 0, err
+	}
+	log.Println(data)
+	js := gjson.Parse(data)
+	jj := js.Get("search-results")
+	jw := jj.Get("opensearch:totalResults").Str
+	total, err := strconv.Atoi(jw)
+	if err != nil{
+		return 0, err
+	}
+	return total , nil
+}
+
+func (worker *Worker)formPagesSearchField(req SearchRequest) []SearchRequest {
+	maxSearchResults, err := worker.getMaxResults(req)
+	if err != nil{
+		log.Println(err)
+		return nil
+	}
+	maxPages := min(maxSearchResults/worker.Config.ResultsPerPage, 4975/worker.Config.ResultsPerPage)
+	result := make([]map[string]string, maxPages)
+	counter := 0
+	for i:=0; i < maxPages; i++ {
+		item := make(map[string]string, len(req.Fields)+1)
+		for k, v := range req.Fields{
+			item[k] = v
+		}
+		item["start"] = strconv.Itoa(counter)
+		result[i] = item
+		counter+=worker.Config.ResultsPerPage
+	}
+	rv := []SearchRequest{}
+	for _, f := range result {
+		workerReq := SearchRequest{SourceName: req.SourceName, Source: req.Source, Fields: f}
+		rv = append(rv, workerReq)
+	}
+	return rv
 }
 
 func ExtractEntry(entry gjson.Result, article *models.Article) {

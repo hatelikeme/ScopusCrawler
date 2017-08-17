@@ -7,10 +7,10 @@ import (
 	"./crawler"
 	"./logger"
 	"./storage"
-	"os"
 	"net/http"
 	"github.com/gorilla/mux"
 	"io"
+	"github.com/urfave/negroni"
 )
 
 func main() {
@@ -28,21 +28,11 @@ func main() {
 	manager := crawler.Manager{}
 	manager.Storage = Storage
 	manager.Init("data-sources.json", conf.WorkersNumber)
-
 	router := mux.NewRouter()
 	router.HandleFunc("/request", RequestHandler(&manager))
-	router.HandleFunc("/")
-	req, err := readRequest("request.json")
-	if err != nil {
-		logger.Error.Println(err)
-		return
-	}
-	err = manager.StartCrawling(req)
-	if err != nil {
-		logger.Error.Println(err)
-		return
-	}
-	fmt.Scanln()
+	n := negroni.Classic()
+	n.UseHandler(router)
+	http.ListenAndServe(":9000", n)
 }
 
 func readRequest(request io.ReadCloser) (crawler.SearchRequest, error) {
