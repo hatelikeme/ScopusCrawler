@@ -32,6 +32,13 @@ func (worker *Worker) Start() {
 			work := <-worker.Work
 			ds := work.Source
 			switch work.SourceName {
+			case "affiliation":
+				affiliation, err := worker.GetAffiliation(work)
+				if err == nil{
+					worker.Storage.CreateAffiliation(affiliation)
+				}else{
+					log.Println(err)
+				}
 			case "PagesNum":
 				requests := worker.formPagesSearchField(work)
 				for _, req := range requests{
@@ -69,6 +76,34 @@ func (worker *Worker) Start() {
 			}
 		}
 	}()
+}
+
+func (worker *Worker)GetAffiliation(req SearchRequest) (models.Affiliation, error) {
+	path := req.Source.Path
+	data, err := query.MakeQuery(path, req.ID, req.Fields, worker.Config.RequestTimeout, worker.Storage, worker.Config)
+	if err != nil{
+		return models.Affiliation{},err
+	}
+	affildata := gjson.Get(data, "affiliation-retreival-response")
+	result := models.Affiliation{}
+	result.ScopusID = req.ID
+	add := affildata.Get("address")
+	if add.Exists(){
+		result.Address = add.String()
+	}
+	city := affildata.Get("city")
+	if city.Exists(){
+		result.City = city.String()
+	}
+	country := affildata.Get("country")
+	if country.Exists(){
+		result.Country = country.String()
+	}
+	title := affildata.Get("affiliation-name")
+	if title.Exists(){
+		result.Title = title.String()
+	}
+	return result, nil
 }
 
 func (worker *Worker)getMaxResults(req SearchRequest) (int, error){
@@ -304,6 +339,46 @@ func ExtractReferences(response gjson.Result) ([]models.Article) {
 	return records
 }
 
+func flattenAffiliations(aff []models.Affiliation) []string {
+	rv := []string{}
+	for _, a := range aff{
+		rv = append(rv, a.ScopusID)
+	}
+	return rv
+}
+
+func checkIfIn(slice []string, elem string) bool {
+	for _, el := range slice{
+		if elem == el {
+			return true
+		}
+	}
+	return false
+}
+
+func (worker *Worker)extractSource(sourceName string) (DataSource, error){
+	for _, ds := range worker.DataSources{
+		if ds.Name == sourceName{
+			return ds, nil
+		}
+	}
+	return DataSource{}, errors.New("data source not found")
+}
+
+func (worker *Worker) CheckAffiliations(article *models.Article) error {
+	afids := flattenAffiliations(article.Affiliations)
+	for _, aut := range article.Authors{
+		if !checkIfIn(afids, aut.AffiliationID){
+			source, err := worker.extractSource("affiliation")
+			if err != nil{
+				return err
+			}
+			worker.Queue <- SearchRequest{SourceName:"affiliation", Source: source, ID: aut.AffiliationID}
+		}
+	}
+	return nil
+}
+
 func (worker *Worker) ProceedArticle(article *models.Article, articleDs DataSource, depth int) error {
 	articleData, err := query.MakeQuery(articleDs.Path, article.ScopusID, map[string]string{}, worker.Config.RequestTimeout,
 		worker.Storage, worker.Config)
@@ -324,6 +399,7 @@ func (worker *Worker) ProceedArticle(article *models.Article, articleDs DataSour
 			article.References = append(article.References, ref)
 		}
 	}
+	worker.CheckAffiliations(article)
 	err = worker.Storage.CreateArticle(*article)
 	if err != nil {
 		return errors.New("Error writing article to database")

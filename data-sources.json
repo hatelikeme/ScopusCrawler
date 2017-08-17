@@ -13,5 +13,10 @@
         "name": "author",
         "path": "http://api.elsevier.com/content/search/scopus?sort=citedby-count&httpAccept=application/json&view=COMPLETE&query=au-id({_id_})&",
         "keys": []
+    },
+    {
+        "name": "affiliation",
+        "path": "http://api.elsevier.com/content/affiliation/affiliation_id/{_id_}?httpAccept=application/json&",
+        "keys": []
     }
 ]
