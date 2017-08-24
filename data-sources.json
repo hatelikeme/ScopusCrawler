@@ -18,5 +18,10 @@
         "name": "affiliation",
         "path": "http://api.elsevier.com/content/affiliation/affiliation_id/{_id_}?httpAccept=application/json&",
         "keys": []
+    },
+    {
+        "name": "PagesNum",
+        "path": "http://api.elsevier.com/content/search/scopus?sort=citedby-count&httpAccept=application/json&view=COMPLETE&",
+        "keys": ["query", "date", "subj"]
     }
 ]

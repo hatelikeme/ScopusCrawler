@@ -19,7 +19,7 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	Storage := storage.MySqlStorage{DBType: storage.MYSQL, User: "root", Password: "temppwd", Address: "localhost:3306", DbName: "test"}
+	Storage := storage.MySqlStorage{DBType: storage.MYSQL, User: "root", Password: "temppwd", Address: "localhost:3306", DbName: "scopus"}
 	err = Storage.Init()
 	if err != nil {
 		logger.Error.Println(err)

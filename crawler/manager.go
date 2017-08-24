@@ -124,7 +124,7 @@ func (manager *Manager) StartCrawling(req SearchRequest) error {
 			}
 		}
 	}
-	if req.ID == "" {
+	if req.SourceName == "search" {
 		req.SourceName = "PagesNum"
 		manager.Queue <- req
 	}

@@ -79,8 +79,11 @@ func (worker *Worker) Start() {
 }
 
 func (worker *Worker)GetAffiliation(req SearchRequest) (models.Affiliation, error) {
-	path := req.Source.Path
-	data, err := query.MakeQuery(path, req.ID, req.Fields, worker.Config.RequestTimeout, worker.Storage, worker.Config)
+	source, err := worker.extractSource(req.SourceName)
+	if err != nil{
+		return models.Affiliation{}, err
+	}
+	data, err := query.MakeQuery(source.Path, req.ID, req.Fields, worker.Config.RequestTimeout, worker.Storage, worker.Config)
 	if err != nil{
 		return models.Affiliation{},err
 	}
@@ -107,15 +110,18 @@ func (worker *Worker)GetAffiliation(req SearchRequest) (models.Affiliation, erro
 }
 
 func (worker *Worker)getMaxResults(req SearchRequest) (int, error){
-	path := req.Source.Path
-	data, err := query.MakeQuery(path, "", req.Fields, worker.Config.RequestTimeout, worker.Storage, worker.Config)
+	source, err := worker.extractSource(req.SourceName)
+	if err != nil{
+		return 0, err
+	}
+	data, err := query.MakeQuery(source.Path, "", req.Fields, worker.Config.RequestTimeout, worker.Storage, worker.Config)
 	if err != nil{
 		return 0, err
 	}
 	log.Println(data)
 	js := gjson.Parse(data)
 	jj := js.Get("search-results")
-	jw := jj.Get("opensearch:totalResults").Str
+	jw := jj.Get("opensearch:totalResults").String()
 	total, err := strconv.Atoi(jw)
 	if err != nil{
 		return 0, err
@@ -132,7 +138,7 @@ func (worker *Worker)formPagesSearchField(req SearchRequest) []SearchRequest {
 	maxPages := min(maxSearchResults/worker.Config.ResultsPerPage, 4975/worker.Config.ResultsPerPage)
 	result := make([]map[string]string, maxPages)
 	counter := 0
-	for i:=0; i < maxPages; i++ {
+	for i:=0; i <= maxPages; i++ {
 		item := make(map[string]string, len(req.Fields)+1)
 		for k, v := range req.Fields{
 			item[k] = v

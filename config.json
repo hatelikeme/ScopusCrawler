@@ -5,5 +5,6 @@
 	"resultsPerPage": 25,
 	"referencesDepth": 0,
 	"requestTimeout": 15,
-	"workersNumber": 144
+	"workersNumber": 144,
+	"Proxy": "http://proxy.ifmo.ru/3128"
 }

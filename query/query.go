@@ -10,6 +10,8 @@ import (
 
 	"../config"
 	"../storage"
+	"net/url"
+	"crypto/tls"
 )
 
 func MakeQuery(address string, id string, params map[string]string, timeoutSec int,
@@ -34,7 +36,13 @@ func MakeQuery(address string, id string, params map[string]string, timeoutSec i
 		if err != nil {
 			return "", err
 		}
+		transport := &http.Transport{}
+		pr_url := &url.URL{}
+		proxyurl, _ := pr_url.Parse(config.Proxy)
+		transport.Proxy = http.ProxyURL(proxyurl)
+		transport.TLSClientConfig = &tls.Config{InsecureSkipVerify: true} //set ssl
 		client := &http.Client{}
+		client.Transport = transport
 		resp, err := client.Do(req)
 		if err != nil {
 			config.RemoveKey(authKey)

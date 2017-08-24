@@ -15,6 +15,7 @@ type Configuration struct {
 	ReferencesDepth int
 	RequestTimeout  int
 	WorkersNumber   int
+	Proxy			string
 }
 
 var (
