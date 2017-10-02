@@ -4,7 +4,7 @@
 	"maxSearchPages": 100,
 	"resultsPerPage": 25,
 	"referencesDepth": 0,
-	"requestTimeout": 15,
+	"requestTimeout": 10,
 	"workersNumber": 144,
-	"Proxy": "http://proxy.ifmo.ru/3128"
+	"Proxy": "http://proxy.ifmo.ru:3128"
 }

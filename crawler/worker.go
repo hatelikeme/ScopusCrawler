@@ -20,7 +20,7 @@ type Worker struct {
 	DataSources []DataSource
 	Work        chan SearchRequest
 	WorkerQueue chan chan SearchRequest
-	Queue		chan SearchRequest
+	Queue       chan SearchRequest
 }
 
 func (worker *Worker) Start() {
@@ -30,23 +30,27 @@ func (worker *Worker) Start() {
 		for {
 			worker.WorkerQueue <- worker.Work
 			work := <-worker.Work
-			ds := work.Source
 			switch work.SourceName {
 			case "affiliation":
 				affiliation, err := worker.GetAffiliation(work)
-				if err == nil{
+				if err == nil {
 					worker.Storage.CreateAffiliation(affiliation)
-				}else{
+				} else {
 					log.Println(err)
 				}
 			case "PagesNum":
 				requests := worker.formPagesSearchField(work)
-				for _, req := range requests{
+				for _, req := range requests {
 					req.SourceName = "search"
 					worker.Queue <- req
 				}
 			case "search":
-				data, err := query.MakeQuery(ds.Path, "", work.Fields, worker.Config.RequestTimeout, worker.Storage, worker.Config)
+				source, err := worker.extractSource("search")
+				if err != nil {
+					logger.Error.Println(err)
+					return
+				}
+				data, err := query.MakeQuery(source.Path, "", work.Fields, worker.Config.RequestTimeout, worker.Storage, worker.Config)
 				if err != nil {
 					logger.Error.Println(err)
 					return
@@ -63,13 +67,14 @@ func (worker *Worker) Start() {
 						break
 					}
 				}
-				for _, article := range articles{
+				for _, article := range articles {
+					log.Println("article added")
 					worker.Queue <- SearchRequest{"article", articleDs, article.ScopusID, nil}
 				}
 			case "article":
-				art := models.Article{ScopusID:work.ID}
+				art := models.Article{ScopusID: work.ID}
 				err := worker.ProceedArticle(&art, work.Source, 0)
-				if err != nil{
+				if err != nil {
 					logger.Error.Println(err)
 					return
 				}
@@ -78,44 +83,44 @@ func (worker *Worker) Start() {
 	}()
 }
 
-func (worker *Worker)GetAffiliation(req SearchRequest) (models.Affiliation, error) {
+func (worker *Worker) GetAffiliation(req SearchRequest) (models.Affiliation, error) {
 	source, err := worker.extractSource(req.SourceName)
-	if err != nil{
+	if err != nil {
 		return models.Affiliation{}, err
 	}
 	data, err := query.MakeQuery(source.Path, req.ID, req.Fields, worker.Config.RequestTimeout, worker.Storage, worker.Config)
-	if err != nil{
-		return models.Affiliation{},err
+	if err != nil {
+		return models.Affiliation{}, err
 	}
 	affildata := gjson.Get(data, "affiliation-retreival-response")
 	result := models.Affiliation{}
 	result.ScopusID = req.ID
 	add := affildata.Get("address")
-	if add.Exists(){
+	if add.Exists() {
 		result.Address = add.String()
 	}
 	city := affildata.Get("city")
-	if city.Exists(){
+	if city.Exists() {
 		result.City = city.String()
 	}
 	country := affildata.Get("country")
-	if country.Exists(){
+	if country.Exists() {
 		result.Country = country.String()
 	}
 	title := affildata.Get("affiliation-name")
-	if title.Exists(){
+	if title.Exists() {
 		result.Title = title.String()
 	}
 	return result, nil
 }
 
-func (worker *Worker)getMaxResults(req SearchRequest) (int, error){
+func (worker *Worker) getMaxResults(req SearchRequest) (int, error) {
 	source, err := worker.extractSource(req.SourceName)
-	if err != nil{
+	if err != nil {
 		return 0, err
 	}
 	data, err := query.MakeQuery(source.Path, "", req.Fields, worker.Config.RequestTimeout, worker.Storage, worker.Config)
-	if err != nil{
+	if err != nil {
 		return 0, err
 	}
 	log.Println(data)
@@ -123,29 +128,29 @@ func (worker *Worker)getMaxResults(req SearchRequest) (int, error){
 	jj := js.Get("search-results")
 	jw := jj.Get("opensearch:totalResults").String()
 	total, err := strconv.Atoi(jw)
-	if err != nil{
+	if err != nil {
 		return 0, err
 	}
-	return total , nil
+	return total, nil
 }
 
-func (worker *Worker)formPagesSearchField(req SearchRequest) []SearchRequest {
+func (worker *Worker) formPagesSearchField(req SearchRequest) []SearchRequest {
 	maxSearchResults, err := worker.getMaxResults(req)
-	if err != nil{
+	if err != nil {
 		log.Println(err)
 		return nil
 	}
 	maxPages := min(maxSearchResults/worker.Config.ResultsPerPage, 4975/worker.Config.ResultsPerPage)
-	result := make([]map[string]string, maxPages)
+	result := make([]map[string]string, maxPages+1)
 	counter := 0
-	for i:=0; i <= maxPages; i++ {
+	for i := 0; i < maxPages+1; i++ {
 		item := make(map[string]string, len(req.Fields)+1)
-		for k, v := range req.Fields{
+		for k, v := range req.Fields {
 			item[k] = v
 		}
 		item["start"] = strconv.Itoa(counter)
 		result[i] = item
-		counter+=worker.Config.ResultsPerPage
+		counter += worker.Config.ResultsPerPage
 	}
 	rv := []SearchRequest{}
 	for _, f := range result {
@@ -190,7 +195,7 @@ func ExtractEntry(entry gjson.Result, article *models.Article) {
 func ExtractAuthors(entry gjson.Result, article *models.Article) {
 	entry = entry.Get("authors")
 	authors := []models.Author{}
-	for _, author := range entry.Get("author").Array(){
+	for _, author := range entry.Get("author").Array() {
 		aut := models.Author{}
 		aScopusID := author.Get("@auid")
 		if aScopusID.Exists() {
@@ -221,9 +226,9 @@ func ExtractAuthors(entry gjson.Result, article *models.Article) {
 	article.Authors = authors
 }
 
-func ExtractAffiliation(entry gjson.Result, article *models.Article){
+func ExtractAffiliation(entry gjson.Result, article *models.Article) {
 	affiliation := []models.Affiliation{}
-	for _, res := range entry.Get("affiliation").Array(){
+	for _, res := range entry.Get("affiliation").Array() {
 		aff := models.Affiliation{}
 		afid := res.Get("@id")
 		if afid.Exists() {
@@ -246,7 +251,7 @@ func ExtractAffiliation(entry gjson.Result, article *models.Article){
 	article.Affiliations = affiliation
 }
 
-func ExtractScopusID(entry gjson.Result)(article models.Article)  {
+func ExtractScopusID(entry gjson.Result) (article models.Article) {
 	ScopusID := entry.Get("dc:identifier")
 	if ScopusID.Exists() {
 		article.ScopusID = strings.Replace(ScopusID.Str, "SCOPUS_ID:", "", 1)
@@ -259,7 +264,7 @@ func (worker *Worker) ExtractArticles(rawResponse string) ([]models.Article, err
 	sresults := gjson.Get(rawResponse, "search-results")
 
 	if sresults.Exists() {
-		for _, entry := range sresults.Get("entry").Array(){
+		for _, entry := range sresults.Get("entry").Array() {
 			article := ExtractScopusID(entry)
 			result = append(result, article)
 		}
@@ -270,7 +275,7 @@ func (worker *Worker) ExtractArticles(rawResponse string) ([]models.Article, err
 }
 
 func ExtractKeywords(response gjson.Result, article *models.Article) {
-	for _, keyword := range response.Get("authkeywords.author-keyword").Array(){
+	for _, keyword := range response.Get("authkeywords.author-keyword").Array() {
 		kw := models.Keyword{}
 		kw.Value = keyword.Get("$").Str
 		h := fnv.New64a()
@@ -281,7 +286,7 @@ func ExtractKeywords(response gjson.Result, article *models.Article) {
 }
 
 func ExtractSubjectArea(response gjson.Result, article *models.Article) {
-	for _, subarea := range response.Get("subject-areas.subject-area").Array(){
+	for _, subarea := range response.Get("subject-areas.subject-area").Array() {
 		subjectarea := models.SubjectArea{}
 		title := subarea.Get("@abbrev")
 		if title.Exists() {
@@ -303,7 +308,7 @@ func ExtractSubjectArea(response gjson.Result, article *models.Article) {
 }
 
 func ExtractRefAuthors(refinfo gjson.Result) (authors []models.Author) {
-	for _, refaut := range refinfo.Get("ref-authors.author").Array(){
+	for _, refaut := range refinfo.Get("ref-authors.author").Array() {
 		author := models.Author{}
 		initials := refaut.Get("ce:initials")
 		if initials.Exists() {
@@ -324,7 +329,7 @@ func ExtractRefAuthors(refinfo gjson.Result) (authors []models.Author) {
 
 func ExtractReferences(response gjson.Result) ([]models.Article) {
 	records := []models.Article{}
-	for _, bibrecord := range response.Get("item.bibrecord.tail.bibliography.reference").Array(){
+	for _, bibrecord := range response.Get("item.bibrecord.tail.bibliography.reference").Array() {
 		record := models.Article{}
 		refinfo := bibrecord.Get("ref-info")
 		title := refinfo.Get("ref-sourcetitle")
@@ -347,14 +352,14 @@ func ExtractReferences(response gjson.Result) ([]models.Article) {
 
 func flattenAffiliations(aff []models.Affiliation) []string {
 	rv := []string{}
-	for _, a := range aff{
+	for _, a := range aff {
 		rv = append(rv, a.ScopusID)
 	}
 	return rv
 }
 
 func checkIfIn(slice []string, elem string) bool {
-	for _, el := range slice{
+	for _, el := range slice {
 		if elem == el {
 			return true
 		}
@@ -362,9 +367,9 @@ func checkIfIn(slice []string, elem string) bool {
 	return false
 }
 
-func (worker *Worker)extractSource(sourceName string) (DataSource, error){
-	for _, ds := range worker.DataSources{
-		if ds.Name == sourceName{
+func (worker *Worker) extractSource(sourceName string) (DataSource, error) {
+	for _, ds := range worker.DataSources {
+		if ds.Name == sourceName {
 			return ds, nil
 		}
 	}
@@ -373,13 +378,13 @@ func (worker *Worker)extractSource(sourceName string) (DataSource, error){
 
 func (worker *Worker) CheckAffiliations(article *models.Article) error {
 	afids := flattenAffiliations(article.Affiliations)
-	for _, aut := range article.Authors{
-		if !checkIfIn(afids, aut.AffiliationID){
+	for _, aut := range article.Authors {
+		if !checkIfIn(afids, aut.AffiliationID) {
 			source, err := worker.extractSource("affiliation")
-			if err != nil{
+			if err != nil {
 				return err
 			}
-			worker.Queue <- SearchRequest{SourceName:"affiliation", Source: source, ID: aut.AffiliationID}
+			worker.Queue <- SearchRequest{SourceName: "affiliation", Source: source, ID: aut.AffiliationID}
 		}
 	}
 	return nil
