@@ -68,7 +68,6 @@ func (worker *Worker) Start() {
 					}
 				}
 				for _, article := range articles {
-					log.Println("article added")
 					worker.Queue <- SearchRequest{"article", articleDs, article.ScopusID, nil}
 				}
 			case "article":
@@ -377,21 +376,28 @@ func (worker *Worker) extractSource(sourceName string) (DataSource, error) {
 }
 
 func (worker *Worker) CheckAffiliations(article *models.Article) error {
-	afids := flattenAffiliations(article.Affiliations)
-	for _, aut := range article.Authors {
-		if !checkIfIn(afids, aut.AffiliationID) {
+	for _, aff := range article.Authors{
+		r, err := worker.Storage.CheckAffiliation(aff.AffiliationID)
+		if err != nil{
+			return err
+		}
+		if r {
 			source, err := worker.extractSource("affiliation")
 			if err != nil {
 				return err
 			}
-			worker.Queue <- SearchRequest{SourceName: "affiliation", Source: source, ID: aut.AffiliationID}
+			worker.Queue <- SearchRequest{SourceName: "affiliation", Source: source, ID: aff.AffiliationID}
 		}
 	}
 	return nil
 }
 
 func (worker *Worker) ProceedArticle(article *models.Article, articleDs DataSource, depth int) error {
-	articleData, err := query.MakeQuery(articleDs.Path, article.ScopusID, map[string]string{}, worker.Config.RequestTimeout,
+	source, err := worker.extractSource("article")
+	if err != nil{
+		return err
+	}
+	articleData, err := query.MakeQuery(source.Path, article.ScopusID, map[string]string{}, worker.Config.RequestTimeout,
 		worker.Storage, worker.Config)
 	if err != nil {
 		logger.Error.Println("Error on requesting data for id=" + article.ScopusID)

@@ -540,40 +540,6 @@ func (storage *MySqlStorage) DeleteAuthor(scopusID string) error {
 	return nil
 }
 
-func (storage *MySqlStorage) CreateFinishedRequest(request string, response string) error {
-	db, err := storage.getDBConnection()
-	if err != nil {
-		return err
-	}
-	req, _ := db.Prepare("REPLACE INTO finished_requests VALUES (?, ?)")
-	_, err = req.Exec(request, response)
-
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (storage *MySqlStorage) GetFinishedRequest(request string) (string, error) {
-	db, err := storage.getDBConnection()
-	if err != nil {
-		return "", err
-	}
-	res, err := db.Query("SELECT DISTINCT response FROM finished_requests WHERE request=" + request)
-	if err != nil {
-		return "", err
-	}
-	for res.Next() {
-		var response string
-		err = res.Scan(&response)
-		if err != nil {
-			return "", err
-		}
-		return response, nil
-	}
-	return "", nil
-}
-
 func (storage *MySqlStorage) CreateKeyword(keyword models.Keyword) error {
 	db, err := storage.getDBConnection()
 	if err != nil {
@@ -585,6 +551,32 @@ func (storage *MySqlStorage) CreateKeyword(keyword models.Keyword) error {
 		return err
 	}
 	return nil
+}
+
+func (storage *MySqlStorage) CheckAffiliation(afid string) (bool, error){
+	db, err := storage.getDBConnection()
+	if err != nil{
+		return false, err
+	}
+	res, err := db.Query(`SELECT TOP 1 scopus_id FROM affiliations WHERE scopus_id=?`, afid)
+	if err != nil{
+		return false, err
+	}
+	count, err := checkCount(res)
+	if count > 0 {
+		return true, nil
+	}
+	return false, nil
+}
+
+func checkCount(rows *sql.Rows) (count int, err error) {
+	for rows.Next(){
+		err = rows.Scan(&count)
+		if err != nil{
+			return 0, err
+		}
+	}
+	return count, nil
 }
 
 func (storage *MySqlStorage) UpdateKeyword(keyword models.Keyword) error {

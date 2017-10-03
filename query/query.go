@@ -26,39 +26,31 @@ func MakeQuery(address string, id string, params map[string]string, timeoutSec i
 	}
 	var data string
 	var body []byte
-	finishedRequest, _ := storage.GetFinishedRequest(requestPath)
-	if finishedRequest == "" {
-		request := requestPath
-		authKey := config.GetKey()
-		requestPath = requestPath + "apiKey=" + authKey
-		fmt.Println(requestPath)
-		req, err := http.NewRequest("GET", requestPath, nil)
-		if err != nil {
-			return "", err
-		}
-		transport := &http.Transport{}
-		pr_url := &url.URL{}
-		proxyurl, _ := pr_url.Parse(config.Proxy)
-		transport.Proxy = http.ProxyURL(proxyurl)
-		transport.TLSClientConfig = &tls.Config{InsecureSkipVerify: true} //set ssl
-		client := &http.Client{}
-		client.Transport = transport
-		resp, err := client.Do(req)
-		if err != nil {
-			config.RemoveKey(authKey)
-			return "", err
-		}
-		defer resp.Body.Close()
-		body, err = ioutil.ReadAll(resp.Body)
-		data = string(body)
-		err = storage.CreateFinishedRequest(request, data)
-		if err != nil{
-			return "", err
-		}
-	} else {
-		data = finishedRequest
+	authKey := config.GetKey()
+	requestPath = requestPath + "apiKey=" + authKey
+	fmt.Println(requestPath)
+	req, err := http.NewRequest("GET", requestPath, nil)
+	if err != nil {
+		return "", err
 	}
-
+	transport := &http.Transport{}
+	pr_url := &url.URL{}
+	proxyurl, _ := pr_url.Parse(config.Proxy)
+	transport.Proxy = http.ProxyURL(proxyurl)
+	transport.TLSClientConfig = &tls.Config{InsecureSkipVerify: true} //set ssl
+	client := &http.Client{}
+	client.Transport = transport
+	resp, err := client.Do(req)
+	if err != nil {
+		config.RemoveKey(authKey)
+		return "", err
+	}
+	defer resp.Body.Close()
+	body, err = ioutil.ReadAll(resp.Body)
+	data = string(body)
+	if err != nil {
+		return "", err
+	}
 	duration := time.Duration(timeoutSec) * time.Second
 	time.Sleep(duration)
 	return data, nil
