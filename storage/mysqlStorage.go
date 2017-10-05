@@ -5,13 +5,14 @@ import (
 	"errors"
 	"fmt"
 
-	_ "github.com/go-sql-driver/mysql"
+	"log"
+
 	"../logger"
 	"../models"
-	"log"
+	_ "github.com/go-sql-driver/mysql"
 )
 
-const(
+const (
 	MYSQL = iota
 	SQLITE
 	POSTGRES
@@ -20,7 +21,7 @@ const(
 type DatabaseType uint8
 
 type MySqlStorage struct {
-	DBType		DatabaseType
+	DBType      DatabaseType
 	Address     string
 	User        string
 	Password    string
@@ -58,6 +59,7 @@ const createArticlesTable = `CREATE TABLE IF NOT EXISTS articles (
 	citations_count INTEGER,
 	publication_type TEXT,
 	publication_title TEXT,
+	doi TEXT,
 	PRIMARY KEY (scopus_id)
 )`
 
@@ -77,30 +79,22 @@ const createKeywordsTable = `CREATE TABLE IF NOT EXISTS keywords (
 
 const createArticleAuthorsTable = `CREATE TABLE IF NOT EXISTS article_author(
 	author_id VARCHAR(20),
-	article_id VARCHAR(20),
-	FOREIGN KEY(author_id) REFERENCES authors(scopus_id) ON DELETE CASCADE,
-	FOREIGN KEY(article_id) REFERENCES articles(scopus_id) ON DELETE CASCADE
+	article_id VARCHAR(20)
 )`
 
 const createArticleArticlesTable = `CREATE TABLE IF NOT EXISTS article_article(
 	from_id VARCHAR(20),
-	to_id VARCHAR(20),
-	FOREIGN KEY(from_id) REFERENCES articles(scopus_id) ON DELETE CASCADE,
-	FOREIGN KEY(to_id) REFERENCES articles(scopus_id) ON DELETE CASCADE
+	to_id VARCHAR(20)
 )`
 
 const createArticleAreasTable = `CREATE TABLE IF NOT EXISTS article_area(
 	area_id VARCHAR(20),
-	article_id VARCHAR(20),
-	FOREIGN KEY(article_id) REFERENCES articles(scopus_id) ON DELETE CASCADE,
-	FOREIGN KEY(area_id) REFERENCES subject_areas(scopus_id) ON DELETE CASCADE
+	article_id VARCHAR(20)
 )`
 
 const createArticleKeywordsTable = `CREATE TABLE IF NOT EXISTS article_keyword(
 	keyword_id VARCHAR(20),
-	article_id VARCHAR(20),
-	FOREIGN KEY(article_id) REFERENCES articles(scopus_id) ON DELETE CASCADE,
-	FOREIGN KEY(keyword_id) REFERENCES keywords(id) ON DELETE CASCADE
+	article_id VARCHAR(20)
 )`
 
 const createFinishedRequestsTable = `CREATE TABLE IF NOT EXISTS finished_requests(
@@ -117,17 +111,17 @@ func getDb(storage *MySqlStorage) (*sql.DB, error) {
 		if err != nil {
 			return nil, err
 		}
-			return db, nil
+		return db, nil
 	case SQLITE:
 		db, err := sql.Open("sqlite3", storage.DbName)
-		if err != nil{
+		if err != nil {
 			return nil, err
 		}
-			return db, nil
+		return db, nil
 	case POSTGRES:
 		log.Println("new Postgres connection")
 		db, err := sql.Open("postgres", "user=gk91 dbname=test sslmode =disable")
-		if err != nil{
+		if err != nil {
 			return nil, err
 		}
 		return db, nil
@@ -139,7 +133,7 @@ func getDb(storage *MySqlStorage) (*sql.DB, error) {
 // Init creates new storage or initializes the existing one
 func (storage *MySqlStorage) Init() error {
 	db, err := getDb(storage)
-	if err != nil{
+	if err != nil {
 		return err
 	}
 	_, err = db.Exec(createAffiliationsTable)
@@ -186,7 +180,6 @@ func (storage *MySqlStorage) Init() error {
 	storage.Initialized = true
 	return nil
 }
-
 
 func (storage *MySqlStorage) getDBConnection() (*sql.DB, error) {
 	return storage.DB, nil
@@ -289,10 +282,10 @@ func (storage *MySqlStorage) CreateArticle(article models.Article) error {
 	if err != nil {
 		return err
 	}
-	req, _ := db.Prepare("REPLACE INTO articles VALUES (?, ?, ?, ?, ?, ?, ?)")
+	req, _ := db.Prepare("REPLACE INTO articles VALUES (?, ?, ?, ?, ?, ?, ?, ?)")
 	defer req.Close()
 	_, err = req.Exec(article.ScopusID, article.Title, article.Abstracts, article.PublicationDate,
-		article.CitationsCount, article.PublicationType, article.PublicationTitle)
+		article.CitationsCount, article.PublicationType, article.PublicationTitle, article.Doi)
 	if err != nil {
 		return err
 	}
@@ -553,13 +546,13 @@ func (storage *MySqlStorage) CreateKeyword(keyword models.Keyword) error {
 	return nil
 }
 
-func (storage *MySqlStorage) CheckAffiliation(afid string) (bool, error){
+func (storage *MySqlStorage) CheckAffiliation(afid string) (bool, error) {
 	db, err := storage.getDBConnection()
-	if err != nil{
+	if err != nil {
 		return false, err
 	}
 	res, err := db.Query(`SELECT TOP 1 scopus_id FROM affiliations WHERE scopus_id=?`, afid)
-	if err != nil{
+	if err != nil {
 		return false, err
 	}
 	count, err := checkCount(res)
@@ -570,9 +563,9 @@ func (storage *MySqlStorage) CheckAffiliation(afid string) (bool, error){
 }
 
 func checkCount(rows *sql.Rows) (count int, err error) {
-	for rows.Next(){
+	for rows.Next() {
 		err = rows.Scan(&count)
-		if err != nil{
+		if err != nil {
 			return 0, err
 		}
 	}

@@ -3,13 +3,14 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
+	"net/http"
+
 	"./config"
 	"./crawler"
 	"./logger"
 	"./storage"
-	"net/http"
 	"github.com/gorilla/mux"
-	"io"
 	"github.com/urfave/negroni"
 )
 
@@ -19,7 +20,7 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	Storage := storage.MySqlStorage{DBType: storage.MYSQL, User: "root", Password: "temppwd", Address: "localhost:3306", DbName: "iccs"}
+	Storage := storage.MySqlStorage{DBType: storage.MYSQL, User: "root", Password: "temppwd", Address: "localhost:3306", DbName: "iccs1"}
 	err = Storage.Init()
 	if err != nil {
 		logger.Error.Println(err)
@@ -45,7 +46,6 @@ func readRequest(request io.ReadCloser) (crawler.SearchRequest, error) {
 	}
 	return req, nil
 }
-
 
 func RequestHandler(manager *crawler.Manager) http.HandlerFunc {
 	fn := func(writer http.ResponseWriter, request *http.Request) {

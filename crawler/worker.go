@@ -2,16 +2,17 @@ package crawler
 
 import (
 	"errors"
+	"hash/fnv"
+	"log"
+	"strconv"
+	"strings"
+
 	"../config"
 	"../logger"
 	"../models"
 	"../query"
 	"../storage"
 	"github.com/tidwall/gjson"
-	"strconv"
-	"strings"
-	"hash/fnv"
-	"log"
 )
 
 type Worker struct {
@@ -27,6 +28,7 @@ func (worker *Worker) Start() {
 	go func() {
 		worker.Config, _ = config.ReadConfig("config.json")
 		worker.Config.InitKeys("keys.txt")
+	loop:
 		for {
 			worker.WorkerQueue <- worker.Work
 			work := <-worker.Work
@@ -48,17 +50,17 @@ func (worker *Worker) Start() {
 				source, err := worker.extractSource("search")
 				if err != nil {
 					logger.Error.Println(err)
-					return
+					continue loop
 				}
 				data, err := query.MakeQuery(source.Path, "", work.Fields, worker.Config.RequestTimeout, worker.Storage, worker.Config)
 				if err != nil {
 					logger.Error.Println(err)
-					return
+					continue loop
 				}
 				articles, err := worker.ExtractArticles(data)
 				if err != nil {
 					logger.Error.Println(err)
-					return
+					continue loop
 				}
 				var articleDs DataSource
 				for _, v := range worker.DataSources {
@@ -75,7 +77,7 @@ func (worker *Worker) Start() {
 				err := worker.ProceedArticle(&art, work.Source, 0)
 				if err != nil {
 					logger.Error.Println(err)
-					return
+					continue loop
 				}
 			}
 		}
@@ -122,7 +124,6 @@ func (worker *Worker) getMaxResults(req SearchRequest) (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	log.Println(data)
 	js := gjson.Parse(data)
 	jj := js.Get("search-results")
 	jw := jj.Get("opensearch:totalResults").String()
@@ -188,6 +189,10 @@ func ExtractEntry(entry gjson.Result, article *models.Article) {
 	abstracts := entry.Get("dc:description")
 	if abstracts.Exists() {
 		article.Abstracts = abstracts.Str
+	}
+	doi := entry.Get("prism:doi")
+	if doi.Exists() {
+		article.Doi = doi.Str
 	}
 }
 
@@ -326,7 +331,7 @@ func ExtractRefAuthors(refinfo gjson.Result) (authors []models.Author) {
 	return authors
 }
 
-func ExtractReferences(response gjson.Result) ([]models.Article) {
+func ExtractReferences(response gjson.Result) []models.Article {
 	records := []models.Article{}
 	for _, bibrecord := range response.Get("item.bibrecord.tail.bibliography.reference").Array() {
 		record := models.Article{}
@@ -376,9 +381,9 @@ func (worker *Worker) extractSource(sourceName string) (DataSource, error) {
 }
 
 func (worker *Worker) CheckAffiliations(article *models.Article) error {
-	for _, aff := range article.Authors{
+	for _, aff := range article.Authors {
 		r, err := worker.Storage.CheckAffiliation(aff.AffiliationID)
-		if err != nil{
+		if err != nil {
 			return err
 		}
 		if r {
@@ -394,7 +399,7 @@ func (worker *Worker) CheckAffiliations(article *models.Article) error {
 
 func (worker *Worker) ProceedArticle(article *models.Article, articleDs DataSource, depth int) error {
 	source, err := worker.extractSource("article")
-	if err != nil{
+	if err != nil {
 		return err
 	}
 	articleData, err := query.MakeQuery(source.Path, article.ScopusID, map[string]string{}, worker.Config.RequestTimeout,

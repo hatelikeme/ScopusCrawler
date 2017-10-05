@@ -1,0 +1,497 @@
+[ERROR]: 2017/10/03 15:54:13 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:54:14 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:54:15 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:54:15 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:54:16 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:54:17 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:54:17 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:54:17 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:57:08 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:57:08 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:57:08 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:57:08 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:57:08 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:57:08 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:57:08 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:57:08 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:57:08 worker.go:60: empty search response
+[ERROR]: 2017/10/03 15:57:09 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:28 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:28 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:35 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:36 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:36 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:53:36 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:59:18 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:59:18 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:59:18 worker.go:60: empty search response
+[ERROR]: 2017/10/03 16:59:18 worker.go:60: empty search response
+[ERROR]: 2017/10/03 17:34:22 mysqlStorage.go:324: Unable to add author 14055268700 to storage
+[ERROR]: 2017/10/03 17:34:22 mysqlStorage.go:325: Error 1213: Deadlock found when trying to get lock; try restarting transaction
+[ERROR]: 2017/10/03 18:11:35 mysqlStorage.go:324: Unable to add author 15070944800 to storage
+[ERROR]: 2017/10/03 18:11:35 mysqlStorage.go:325: Error 1213: Deadlock found when trying to get lock; try restarting transaction
+[ERROR]: 2017/10/03 20:44:08 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:03:36 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:03:36 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:03:36 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:03:36 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:03:37 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:03:39 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:03:39 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:03:40 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:03:41 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:03:41 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:03:42 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:03:42 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:03:43 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:06 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:37 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:45 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:45 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:46 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:46 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:47 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:51 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:54 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:54 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:56 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:58 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:58 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:59 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:04:59 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:05:05 worker.go:60: empty search response
+[ERROR]: 2017/10/03 21:05:06 worker.go:60: empty search response
+[ERROR]: 2017/10/03 22:13:17 worker.go:60: empty search response
+[ERROR]: 2017/10/03 22:14:54 worker.go:60: empty search response
+[ERROR]: 2017/10/04 19:50:43 worker.go:62: empty search response
+[ERROR]: 2017/10/04 19:50:43 worker.go:62: empty search response
+[ERROR]: 2017/10/04 19:50:43 worker.go:62: empty search response
+[ERROR]: 2017/10/04 19:50:43 worker.go:62: empty search response
+[ERROR]: 2017/10/04 19:50:43 worker.go:62: empty search response
+[ERROR]: 2017/10/04 19:50:43 worker.go:62: empty search response
+[ERROR]: 2017/10/04 19:50:43 worker.go:62: empty search response
+[ERROR]: 2017/10/04 19:50:43 worker.go:62: empty search response
+[ERROR]: 2017/10/04 19:50:43 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:01 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:01 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:01 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:01 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:01 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:01 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:01 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:01 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:02 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:02 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:02 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:02 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:02 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:02 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:02 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:03 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:03 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:03 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:03 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:03 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:03 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:03 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:27:04 worker.go:62: empty search response
+[ERROR]: 2017/10/04 20:28:24 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:32:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:32:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:32:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:32:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:32:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:32:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:32:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:32:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:32:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:32:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:32:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:17 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:20 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:20 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:20 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:20 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:21 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:21 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:21 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:21 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:21 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:21 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:22 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:22 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:22 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:22 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:22 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:22 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:23 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:23 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:23 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:23 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:32 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:32 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:32 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:33 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:33 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:34 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:34 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:34 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:34 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:35 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:36 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:36 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:36 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:36 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:37 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:37 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:37 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:37 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:37 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:37 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:38 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:38 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:38 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:38 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:38 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:43:38 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:31 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:31 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:31 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:31 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:31 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:32 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:51 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:51 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:51 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:52 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:52 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:52 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:52 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:52 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:52 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:52 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:52 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:52 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:53 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:53 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:53 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:53 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:53 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:54 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:54 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:54 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:44:54 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:09 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:09 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:09 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:09 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:10 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:10 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:10 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:10 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:10 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:11 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:11 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:11 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:11 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:11 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:11 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:12 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:12 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:12 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:12 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:13 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:13 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:14 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:14 worker.go:62: empty search response
+[ERROR]: 2017/10/04 22:45:14 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:27 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:27 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:27 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:27 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:29 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:13:30 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:38:43 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:38:44 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:38:44 worker.go:62: empty search response
+[ERROR]: 2017/10/04 23:38:45 worker.go:62: empty search response
+[ERROR]: 2017/10/05 00:23:14 worker.go:62: empty search response
+[ERROR]: 2017/10/05 01:13:43 worker.go:62: empty search response
+[ERROR]: 2017/10/05 01:13:44 worker.go:62: empty search response
+[ERROR]: 2017/10/05 01:13:44 worker.go:62: empty search response
+[ERROR]: 2017/10/05 01:13:44 worker.go:62: empty search response
+[ERROR]: 2017/10/05 01:13:44 worker.go:62: empty search response
+[ERROR]: 2017/10/05 01:13:44 worker.go:62: empty search response
+[ERROR]: 2017/10/05 01:13:44 worker.go:62: empty search response
+[ERROR]: 2017/10/05 01:13:44 worker.go:62: empty search response
+[ERROR]: 2017/10/05 01:13:44 worker.go:62: empty search response
+[ERROR]: 2017/10/05 01:13:44 worker.go:62: empty search response
+[ERROR]: 2017/10/05 01:13:45 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:32 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:35 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:35 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:35 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:35 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:35 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:35 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:36 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:36 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:37 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:37 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:37 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:37 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:38 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:38 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:38 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:39 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:40 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:40 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:40 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:40 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:40 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:41 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:41 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:38:41 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:43:32 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:43:32 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:43:43 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:43:49 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:43:51 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:43:54 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:44:02 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:44:02 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:44:15 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:44:19 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:44:22 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:46:30 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:46:34 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:48:10 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:48:13 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:48:31 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:48:41 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:48:42 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:48:48 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:57:01 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:57:12 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:57:12 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:57:12 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:57:12 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:57:12 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:57:12 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:57:59 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:57:59 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:57:59 worker.go:62: empty search response
+[ERROR]: 2017/10/05 05:57:59 worker.go:62: empty search response
+[ERROR]: 2017/10/05 06:39:12 mysqlStorage.go:324: Unable to add author 35303889700 to storage
+[ERROR]: 2017/10/05 06:39:12 mysqlStorage.go:325: Error 1213: Deadlock found when trying to get lock; try restarting transaction
+[ERROR]: 2017/10/05 07:32:33 mysqlStorage.go:324: Unable to add author 14627724300 to storage
+[ERROR]: 2017/10/05 07:32:33 mysqlStorage.go:325: Error 1213: Deadlock found when trying to get lock; try restarting transaction
+[ERROR]: 2017/10/05 07:36:00 mysqlStorage.go:324: Unable to add author 55523076400 to storage
+[ERROR]: 2017/10/05 07:36:00 mysqlStorage.go:325: Error 1213: Deadlock found when trying to get lock; try restarting transaction
+[ERROR]: 2017/10/05 10:08:31 mysqlStorage.go:324: Unable to add author 26423894200 to storage
+[ERROR]: 2017/10/05 10:08:31 mysqlStorage.go:325: Error 1213: Deadlock found when trying to get lock; try restarting transaction
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84878617728
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84878617728?httpAccept=application/json&view=FULL&apiKey=dcf01145e72dd58778a499d0a94cd19d: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84860760518
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84860760518?httpAccept=application/json&view=FULL&apiKey=5cddb1a87ed20fd122dfd553618dab7c: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84928523003
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84928523003?httpAccept=application/json&view=FULL&apiKey=f96610979a70955a941242e92b328967: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84922272908
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84922272908?httpAccept=application/json&view=FULL&apiKey=3744dbc16ccc011641f450a3427ba942: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=52649109759
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/52649109759?httpAccept=application/json&view=FULL&apiKey=d5c68317aaedecdcd8848394ee5e06b7: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84860239831
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84860239831?httpAccept=application/json&view=FULL&apiKey=36103f0ddb4b8c9198c670f8695d360e: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84919936018
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84919936018?httpAccept=application/json&view=FULL&apiKey=2568622fdd0e5ca24c8acd0802352c64: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84925679491
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84925679491?httpAccept=application/json&view=FULL&apiKey=b18deed3f835321318b6dd7ef0220333: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84885921579
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84885921579?httpAccept=application/json&view=FULL&apiKey=acd521e2a31f9bd13895e218dfab5a2a: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=79551681872
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/79551681872?httpAccept=application/json&view=FULL&apiKey=3f7ecbdb5f362ab559b577b976eaab0d: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=78649657591
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/78649657591?httpAccept=application/json&view=FULL&apiKey=5e58923b2f2fb35e2a6e20c10721eb7b: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84906981315
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84906981315?httpAccept=application/json&view=FULL&apiKey=6ad46e3dc5d6e80794a583d8112cbeb0: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84943577520
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84943577520?httpAccept=application/json&view=FULL&apiKey=dfef72df7a2b482bd0f0242c494a3158: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=70449371001
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/70449371001?httpAccept=application/json&view=FULL&apiKey=524009e4d1dadc05a6c1b4c2b5f0ad83: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84906971653
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84906971653?httpAccept=application/json&view=FULL&apiKey=88b3c4e5bf40d6309a4ac9bbd3f2094c: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=77956825250
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/77956825250?httpAccept=application/json&view=FULL&apiKey=ce4b78278627d3303508b78dc9a0ab68: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=67649312322
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/67649312322?httpAccept=application/json&view=FULL&apiKey=ed6663fcff5508653cfd077b3bd22d71: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84902094736
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84902094736?httpAccept=application/json&view=FULL&apiKey=2c4f6a478532ea963b72d70c6a47b85f: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84965076193
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84965076193?httpAccept=application/json&view=FULL&apiKey=108d9f3436492d21aabc0cfe16056b88: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=17144431425
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/17144431425?httpAccept=application/json&view=FULL&apiKey=2edd1a44816e7ba7488e3194a386b346: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84927630067
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84927630067?httpAccept=application/json&view=FULL&apiKey=a326d38c9572e40a33ed1bca17122c17: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=58849142077
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/58849142077?httpAccept=application/json&view=FULL&apiKey=2a340773b43f0d625078ea1b6896b2a0: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84982126142
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84982126142?httpAccept=application/json&view=FULL&apiKey=b9ece2e57b16ec832400fbddd7a10d89: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=46349104023
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/46349104023?httpAccept=application/json&view=FULL&apiKey=5e58923b2f2fb35e2a6e20c10721eb7b: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=80053300687
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/80053300687?httpAccept=application/json&view=FULL&apiKey=d3b8b5bb3fbbc254363557a0e32306de: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=24644448329
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/24644448329?httpAccept=application/json&view=FULL&apiKey=55af4d7f7861d637708a2760a11c139d: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84902153466
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84902153466?httpAccept=application/json&view=FULL&apiKey=7a82882bef7ccdb9f4517a9b4d9377eb: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=85020459473
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/85020459473?httpAccept=application/json&view=FULL&apiKey=c0aa2344fb2ee766e1e0fbf9d136e81a: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=78349302309
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/78349302309?httpAccept=application/json&view=FULL&apiKey=d3ddd05c61a750030ab3958322d69472: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84860733274
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84860733274?httpAccept=application/json&view=FULL&apiKey=ba9769d62f2c8016538fc26c42e71c64: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84980038899
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84980038899?httpAccept=application/json&view=FULL&apiKey=daaedd92a761039579721bcd78fa246a: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84860245558
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84860245558?httpAccept=application/json&view=FULL&apiKey=fbb309f2f8b4c90f6342955a4d5a1633: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=85027051711
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/85027051711?httpAccept=application/json&view=FULL&apiKey=b31d9fc624e26ec248b8a8363ca69dce: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=79957970145
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/79957970145?httpAccept=application/json&view=FULL&apiKey=740a83c8c60a306ea0760b947c0d5145: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84949844631
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84949844631?httpAccept=application/json&view=FULL&apiKey=524009e4d1dadc05a6c1b4c2b5f0ad83: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84996590431
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84996590431?httpAccept=application/json&view=FULL&apiKey=372cf9f9c0b146e5357d30ba88e2b03b: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84860238293
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84860238293?httpAccept=application/json&view=FULL&apiKey=00c2fd03a170f0f7e22734df7c5b3595: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=77956827346
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/77956827346?httpAccept=application/json&view=FULL&apiKey=bd1fa13ff47ccd67118871377bc2ef28: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=67149113791
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/67149113791?httpAccept=application/json&view=FULL&apiKey=40009c556d99597054f68eb7330d3bde: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=85019215110
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/85019215110?httpAccept=application/json&view=FULL&apiKey=fbf180c2f9d9d3999ad74b1c0afba9b9: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84943570471
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84943570471?httpAccept=application/json&view=FULL&apiKey=ac160471a86877fccc16397bf27fcc34: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=79957957244
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/79957957244?httpAccept=application/json&view=FULL&apiKey=a1159e9a8f2ad1666091313e7ac0ecba: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84922569798
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84922569798?httpAccept=application/json&view=FULL&apiKey=4e80649c1b57972bac546b86df184e39: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=85020771672
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/85020771672?httpAccept=application/json&view=FULL&apiKey=85e25c04460484b61aae58337de04461: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=33750249659
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/33750249659?httpAccept=application/json&view=FULL&apiKey=51bbc7da2e4126a20598274fda47eabd: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84928544049
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84928544049?httpAccept=application/json&view=FULL&apiKey=5727d489a97d8b380064e4d5a00623a8: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=79955877113
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/79955877113?httpAccept=application/json&view=FULL&apiKey=cbc21a0da8e26047cb1885fa5add8ea6: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=77956844432
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/77956844432?httpAccept=application/json&view=FULL&apiKey=eb28b0c112bea03b448cefa47dbcaf19: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=33645748977
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/33645748977?httpAccept=application/json&view=FULL&apiKey=2945f2a992a2f55f2b637e397be08644: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84928579346
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84928579346?httpAccept=application/json&view=FULL&apiKey=652ecb042f1f0d8dc49eb621aeba72c1: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=85009090855
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/85009090855?httpAccept=application/json&view=FULL&apiKey=e52fcd3b008a8e439aabbecc91db4dab: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=23644450228
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/23644450228?httpAccept=application/json&view=FULL&apiKey=a441581b6fb34c57a2b265880cdddf41: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84902108524
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84902108524?httpAccept=application/json&view=FULL&apiKey=1a161669833555c6f7d971888b6b8016: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84934941086
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84934941086?httpAccept=application/json&view=FULL&apiKey=10800c5d3b68877b8973323eda053f6a: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=20344404465
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/20344404465?httpAccept=application/json&view=FULL&apiKey=ee6015f5306fa9460f2edcc26cb9a737: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84868650414
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84868650414?httpAccept=application/json&view=FULL&apiKey=16131c1f7e95f153dff38a185b3eb907: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=3042525220
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/3042525220?httpAccept=application/json&view=FULL&apiKey=c0e63af471098beea8644c1ad0370d69: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84978306017
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84978306017?httpAccept=application/json&view=FULL&apiKey=a7947f0e53d4e4862a8cb19dec00bc73: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=67149112099
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/67149112099?httpAccept=application/json&view=FULL&apiKey=09184986d211cfe97c246e653abe73dc: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84943577140
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84943577140?httpAccept=application/json&view=FULL&apiKey=f754846322e460237cccfe3b3858f0bc: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=79955846786
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/79955846786?httpAccept=application/json&view=FULL&apiKey=0e592b7695f03469bc5f487ef3fef653: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=85006483760
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/85006483760?httpAccept=application/json&view=FULL&apiKey=69fc364c848b1d9a31678a910de64463: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=20344405216
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/20344405216?httpAccept=application/json&view=FULL&apiKey=ba9769d62f2c8016538fc26c42e71c64: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=77954971100
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/77954971100?httpAccept=application/json&view=FULL&apiKey=4e80649c1b57972bac546b86df184e39: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84922325912
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84922325912?httpAccept=application/json&view=FULL&apiKey=aceea6ff6e0dbddfbebd014e60520114: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84938236960
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84938236960?httpAccept=application/json&view=FULL&apiKey=fda29cc87cfff76f5cf99b2fa8bac51d: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=79959828293
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/79959828293?httpAccept=application/json&view=FULL&apiKey=68ad5a1f529c46c441fc9ca41db31455: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=84935010536
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/84935010536?httpAccept=application/json&view=FULL&apiKey=354f767ac02a8721ea0a88a1a31e51ac: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=5644304404
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/5644304404?httpAccept=application/json&view=FULL&apiKey=4a23c443ca4501a028525b5fffae3ac5: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 10:49:21 worker.go:404: Error on requesting data for id=70449401643
+[ERROR]: 2017/10/05 10:49:21 worker.go:405: Get http://api.elsevier.com/content/abstract/scopus_id/70449401643?httpAccept=application/json&view=FULL&apiKey=c205a7cc8ff146aba18843501060d94f: proxyconnect tcp: dial tcp: lookup proxy.ifmo.ru on 77.234.212.54:53: read udp 192.168.0.216:54638->77.234.212.54:53: i/o timeout
+[ERROR]: 2017/10/05 11:41:13 mysqlStorage.go:309: Unable to add subject area 6495287798577989852 to storage
+[ERROR]: 2017/10/05 11:41:13 mysqlStorage.go:310: Error 1213: Deadlock found when trying to get lock; try restarting transaction
+[ERROR]: 2017/10/05 11:59:33 mysqlStorage.go:324: Unable to add author 6603728632 to storage
+[ERROR]: 2017/10/05 11:59:33 mysqlStorage.go:325: Error 1213: Deadlock found when trying to get lock; try restarting transaction
+[ERROR]: 2017/10/05 11:59:33 mysqlStorage.go:324: Unable to add author 6603728632 to storage
+[ERROR]: 2017/10/05 11:59:33 mysqlStorage.go:325: Error 1213: Deadlock found when trying to get lock; try restarting transaction
+[ERROR]: 2017/10/05 12:10:18 mysqlStorage.go:324: Unable to add author 55551282000 to storage
+[ERROR]: 2017/10/05 12:10:18 mysqlStorage.go:325: Error 1213: Deadlock found when trying to get lock; try restarting transaction
+[ERROR]: 2017/10/05 12:20:52 mysqlStorage.go:324: Unable to add author 25522450500 to storage
+[ERROR]: 2017/10/05 12:20:52 mysqlStorage.go:325: Error 1213: Deadlock found when trying to get lock; try restarting transaction
+[ERROR]: 2017/10/05 12:28:18 mysqlStorage.go:324: Unable to add author 23478565400 to storage
+[ERROR]: 2017/10/05 12:28:18 mysqlStorage.go:325: Error 1213: Deadlock found when trying to get lock; try restarting transaction
+[ERROR]: 2017/10/05 16:22:28 worker.go:62: empty search response
+[ERROR]: 2017/10/05 16:22:28 worker.go:62: empty search response
+[ERROR]: 2017/10/05 16:22:28 worker.go:62: empty search response
+[ERROR]: 2017/10/05 16:22:28 worker.go:62: empty search response
+[ERROR]: 2017/10/05 16:22:28 worker.go:62: empty search response
+[ERROR]: 2017/10/05 16:22:28 worker.go:62: empty search response
+[ERROR]: 2017/10/05 16:22:28 worker.go:62: empty search response
+[ERROR]: 2017/10/05 16:22:28 worker.go:62: empty search response
+[ERROR]: 2017/10/05 16:22:28 worker.go:62: empty search response
