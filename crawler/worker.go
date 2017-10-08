@@ -221,9 +221,10 @@ func ExtractAuthors(entry gjson.Result, article *models.Article) {
 		if initials.Exists() {
 			aut.Initials = initials.Str
 		}
-		afid := author.Get("affiliation.@id")
-		if afid.Exists() {
-			aut.AffiliationID = afid.Str
+		af := author.Get("affiliation").Array()
+		for _, a := range af {
+			afid := a.Get("@id").Str
+			aut.AffiliationID = append(aut.AffiliationID, afid)
 		}
 		authors = append(authors, aut)
 	}
@@ -380,23 +381,6 @@ func (worker *Worker) extractSource(sourceName string) (DataSource, error) {
 	return DataSource{}, errors.New("data source not found")
 }
 
-func (worker *Worker) CheckAffiliations(article *models.Article) error {
-	for _, aff := range article.Authors {
-		r, err := worker.Storage.CheckAffiliation(aff.AffiliationID)
-		if err != nil {
-			return err
-		}
-		if r {
-			source, err := worker.extractSource("affiliation")
-			if err != nil {
-				return err
-			}
-			worker.Queue <- SearchRequest{SourceName: "affiliation", Source: source, ID: aff.AffiliationID}
-		}
-	}
-	return nil
-}
-
 func (worker *Worker) ProceedArticle(article *models.Article, articleDs DataSource, depth int) error {
 	source, err := worker.extractSource("article")
 	if err != nil {
@@ -421,7 +405,6 @@ func (worker *Worker) ProceedArticle(article *models.Article, articleDs DataSour
 			article.References = append(article.References, ref)
 		}
 	}
-	worker.CheckAffiliations(article)
 	err = worker.Storage.CreateArticle(*article)
 	if err != nil {
 		return errors.New("Error writing article to database")

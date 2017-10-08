@@ -6,7 +6,7 @@ type Author struct {
 	IndexedName   string `json:"ce:indexed-name"`
 	Surname       string `json:"ce:surname"`
 	Name          string
-	AffiliationID string
+	AffiliationID []string
 	Affiliation   Affiliation
 }
 

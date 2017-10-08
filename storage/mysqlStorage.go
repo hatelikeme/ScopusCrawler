@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-
 	"log"
+	"strings"
 
 	"../logger"
 	"../models"
@@ -79,7 +79,8 @@ const createKeywordsTable = `CREATE TABLE IF NOT EXISTS keywords (
 
 const createArticleAuthorsTable = `CREATE TABLE IF NOT EXISTS article_author(
 	author_id VARCHAR(20),
-	article_id VARCHAR(20)
+	article_id VARCHAR(20),
+	author_affiliations TEXT
 )`
 
 const createArticleArticlesTable = `CREATE TABLE IF NOT EXISTS article_article(
@@ -317,8 +318,9 @@ func (storage *MySqlStorage) CreateArticle(article models.Article) error {
 			logger.Error.Println("Unable to add author " + author.ScopusID + " to storage")
 			logger.Error.Println(err)
 		} else {
-			req, _ := db.Prepare("INSERT INTO article_author VALUES(?, ?)")
-			_, err = req.Exec(author.ScopusID, article.ScopusID)
+			req, _ := db.Prepare("INSERT INTO article_author VALUES(?, ?, ?)")
+			afids := strings.Join(author.AffiliationID[:], ",")
+			_, err = req.Exec(author.ScopusID, article.ScopusID, afids)
 			req.Close()
 			if err != nil {
 				logger.Error.Println("Unable to connect article " + article.ScopusID + " with author " + author.ScopusID)
