@@ -222,9 +222,14 @@ func ExtractAuthors(entry gjson.Result, article *models.Article) {
 			aut.Initials = initials.Str
 		}
 		af := author.Get("affiliation").Array()
-		for _, a := range af {
-			afid := a.Get("@id").Str
-			aut.AffiliationID = append(aut.AffiliationID, afid)
+		if len(af) > 0 {
+			for _, a := range af {
+				afid := a.Get("@id").Str
+				aut.AffiliationID = append(aut.AffiliationID, afid)
+			}
+		} else {
+			af1 := author.Get("affiliation.@id").Str
+			aut.AffiliationID = append(aut.AffiliationID, af1)
 		}
 		authors = append(authors, aut)
 	}

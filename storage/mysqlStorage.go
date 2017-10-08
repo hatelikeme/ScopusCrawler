@@ -32,7 +32,6 @@ type MySqlStorage struct {
 
 const createAuthorsTable = `CREATE TABLE IF NOT EXISTS authors (
 	scopus_id VARCHAR(20),
-	affiliation_id VARCHAR(20),
 	initials TEXT,
 	indexed_name TEXT,
 	surname TEXT,
@@ -319,7 +318,8 @@ func (storage *MySqlStorage) CreateArticle(article models.Article) error {
 			logger.Error.Println(err)
 		} else {
 			req, _ := db.Prepare("INSERT INTO article_author VALUES(?, ?, ?)")
-			afids := strings.Join(author.AffiliationID[:], ",")
+			var afids string = ""
+			afids = strings.Join(author.AffiliationID[:], ",")
 			_, err = req.Exec(author.ScopusID, article.ScopusID, afids)
 			req.Close()
 			if err != nil {
@@ -445,8 +445,8 @@ func (storage *MySqlStorage) CreateAuthor(author models.Author) error {
 	if err != nil {
 		return err
 	}
-	req, _ := db.Prepare("REPLACE INTO authors VALUES (?, ?, ?, ?, ?, ?)")
-	_, err = req.Exec(author.ScopusID, author.AffiliationID, author.Initials,
+	req, _ := db.Prepare("REPLACE INTO authors VALUES (?, ?, ?, ?, ?)")
+	_, err = req.Exec(author.ScopusID, author.Initials,
 		author.IndexedName, author.Surname, author.Name)
 	req.Close()
 	if err != nil {
