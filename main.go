@@ -20,12 +20,17 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	Storage := storage.MySqlStorage{DBType: storage.MYSQL, User: "root", Password: "temppwd", Address: "localhost:3306", DbName: "iccs1"}
+	conf, _ := config.ReadConfig("config.json")
+	Storage := storage.MySqlStorage{
+		DBType:   storage.MYSQL,
+		User:     conf.Mysqluser,
+		Password: conf.Mysqlpass,
+		Address:  conf.Mysqladdress,
+		DbName:   conf.Mysqldbname}
 	err = Storage.Init()
 	if err != nil {
 		logger.Error.Println(err)
 	}
-	conf, _ := config.ReadConfig("config.json")
 	manager := crawler.Manager{}
 	manager.Storage = Storage
 	manager.Init("data-sources.json", conf.WorkersNumber)

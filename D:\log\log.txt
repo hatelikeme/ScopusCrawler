@@ -1,0 +1,2 @@
+[ERROR]: 2018/10/12 12:35:28 main.go:26: dial tcp [::1]:3306: getsockopt: connection refused
+[ERROR]: 2018/10/12 12:44:55 main.go:32: dial tcp [::1]:3306: getsockopt: connection refused

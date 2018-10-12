@@ -15,7 +15,11 @@ type Configuration struct {
 	ReferencesDepth int
 	RequestTimeout  int
 	WorkersNumber   int
-	Proxy			string
+	Proxy           string
+	Mysqluser       string
+	Mysqlpass       string
+	Mysqladdress    string
+	Mysqldbname     string
 }
 
 var (
